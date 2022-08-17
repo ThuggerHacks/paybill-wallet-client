@@ -1,8 +1,8 @@
  <!-- app footer -->
  <div class="appFooter my-2 ">
     <div class="footer-title">
-        Copyright © Finapp 2021. All Rights Reserved.
+        Copyright © Paybill {{ date("Y") }}. All Rights Reserved.
     </div>
-    Bootstrap 5 based mobile template.
+    Keep your money safe and pay your bills
 </div>
 <!-- * app footer -->
