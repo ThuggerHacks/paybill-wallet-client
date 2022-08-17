@@ -69,10 +69,10 @@
     <ul class="listview image-listview text inset">
         <li>
             <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogForm">
-                <div class="in">
+                <div class="in" style="width:60%">
                     <div>Change Username</div>
                 </div>
-                <div>
+                <div  style="width:40%;text-align:end">
                     Braimo Selimane
                 </div>
             </a>
