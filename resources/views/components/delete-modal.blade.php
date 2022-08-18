@@ -3,15 +3,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete</h5>
+                <h5 class="modal-title">Apagar</h5>
             </div>
             <div class="modal-body">
-                Are you sure?
+                Tem certeza?
             </div>
             <div class="modal-footer">
                 <div class="btn-inline">
-                    <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">CANCEL</a>
-                    <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal">DELETE</a>
+                    <a href="#" class="btn btn-text-secondary" data-bs-dismiss="modal">CANCELAR</a>
+                    <a href="#" class="btn btn-text-primary" data-bs-dismiss="modal">APAGAR</a>
                 </div>
             </div>
         </div>

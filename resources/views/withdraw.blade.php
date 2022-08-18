@@ -1,10 +1,10 @@
 @extends("layouts.layout")
 
-@section("title","Withdraws")
+@section("title","Levantamentos")
 
 @section("content")
 
-@include("_partials.header",["title" => "WithDraws"])
+@include("_partials.header",["title" => "Levantamentos"])
 
 <!-- App Capsule -->
 <div id="appCapsule">
@@ -74,7 +74,7 @@
 
     <!-- Transactions -->
     <div class="section mt-2">
-        <div class="section-title">Yesterday</div>
+        <div class="section-title">Ontem</div>
         <div class="transactions">
             <!-- item -->
             <a href="{{ route("transation.details") }}" class="item">
@@ -110,7 +110,7 @@
 
 
     <div class="section mt-2 mb-2">
-        <a href="#" class="btn btn-primary btn-block btn-lg">Load More</a>
+        <a href="#" class="btn btn-primary btn-block btn-lg">Carregar mais</a>
     </div>
 </div>
 

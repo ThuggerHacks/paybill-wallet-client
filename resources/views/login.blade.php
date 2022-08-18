@@ -11,8 +11,8 @@
  <div id="appCapsule">
 
     <div class="section mt-2 text-center">
-        <h1>Log in</h1>
-        <h4>Fill the form to log in</h4>
+        <h1>Entrar</h1>
+        <h4>Preencha o formulário para entrar</h4>
     </div>
     <div class="section mb-5 p-2">
 
@@ -23,7 +23,7 @@
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="email1">E-mail</label>
-                            <input type="email" class="form-control" id="email1" placeholder="Your e-mail">
+                            <input type="email" class="form-control" id="email1" placeholder="Seu e-mail">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -32,9 +32,9 @@
 
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="password1">Password</label>
+                            <label class="label" for="password1">Senha</label>
                             <input type="password" class="form-control" id="password1" autocomplete="off"
-                                placeholder="Your password">
+                                placeholder="Sua Senha">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -46,13 +46,13 @@
 
             <div class="form-links mt-2">
                 <div>
-                    <a href="{{ route("register") }}">Register Now</a>
+                    <a href="{{ route("register") }}">Registrar agora</a>
                 </div>
-                <div><a href="{{ route("forgot.password") }}" class="text-muted">Forgot Password?</a></div>
+                <div><a href="{{ route("forgot.password") }}" class="text-muted">Esqueceu a senha?</a></div>
             </div>
 
             <div class="form-button-group  transparent">
-                <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Entrar</button>
             </div>
 
         </form>

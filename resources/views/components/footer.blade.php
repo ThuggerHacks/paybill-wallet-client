@@ -1,8 +1,8 @@
  <!-- app footer -->
  <div class="appFooter my-2 ">
     <div class="footer-title">
-        Copyright © Paybill {{ date("Y") }}. All Rights Reserved.
+        Copyright © Paybill {{ date("Y") }}. Todos os direitos reservados.
     </div>
-    Keep your money safe and pay your bills
+    Mantenha seu dinheiro seguro e pague suas contas
 </div>
 <!-- * app footer -->

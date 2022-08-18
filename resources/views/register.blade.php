@@ -1,6 +1,6 @@
 @extends("layouts.layout")
 
-@section("title","Register")
+@section("title","Registar")
 
 
 @section("content")
@@ -11,8 +11,8 @@
 <div id="appCapsule">
 
     <div class="section mt-2 text-center">
-        <h1>Register now</h1>
-        <h4>Create an account</h4>
+        <h1>Registrar agora</h1>
+        <h4>Crie a sua conta aqui</h4>
     </div>
     <div class="section mb-5 p-2">
         <form action="#">
@@ -22,7 +22,7 @@
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="email1">E-mail</label>
-                            <input type="email" class="form-control" id="email1" placeholder="Your e-mail">
+                            <input type="email" class="form-control" id="email1" placeholder="Seu e-mail">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -31,8 +31,8 @@
 
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="phone">Phone Number</label>
-                            <input type="number" class="form-control" id="phone" placeholder="Your Phone Number">
+                            <label class="label" for="phone">Número de telefone</label>
+                            <input type="number" class="form-control" id="phone" placeholder="Seu Número de telefone">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -41,8 +41,8 @@
 
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="birthdate">Birthdate</label>
-                            <input type="date" class="form-control" id="birthdate" placeholder="Your Birthdate">
+                            <label class="label" for="birthdate">Data de nascimento</label>
+                            <input type="date" class="form-control" id="birthdate" placeholder="Sua Data de nascimento">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -51,8 +51,8 @@
 
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="birthplace">Birthplace</label>
-                            <input type="text" class="form-control" id="birthplace" placeholder="Your Birthplace">
+                            <label class="label" for="birthplace">Local de nascimento</label>
+                            <input type="text" class="form-control" id="birthplace" placeholder="Local de nascimento">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -61,9 +61,9 @@
 
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="password1">Password</label>
+                            <label class="label" for="password1">Senha</label>
                             <input type="password" class="form-control" id="password1" autocomplete="off"
-                                placeholder="Your password">
+                                placeholder="Senha">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -72,9 +72,9 @@
 
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="password2">Password Again</label>
+                            <label class="label" for="password2">Confirme a Senha</label>
                             <input type="password" class="form-control" id="password2" autocomplete="off"
-                                placeholder="Type password again">
+                                placeholder="Digite a senha novamente">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -85,8 +85,8 @@
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="customCheckb1">
                             <label class="form-check-label" for="customCheckb1">
-                                I agree <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and
-                                    conditions</a>
+                                Concordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">termos e
+                                    condições</a>
                             </label>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
 
 
             <div class="form-button-group transparent">
-                <button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Registar</button>
             </div>
 
         </form>
@@ -112,8 +112,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Terms and Conditions</h5>
-                <a href="#" data-bs-dismiss="modal">Close</a>
+                <h5 class="modal-title">Termos e Condições</h5>
+                <a href="#" data-bs-dismiss="modal">Fechar</a>
             </div>
             <div class="modal-body">
                 <p>

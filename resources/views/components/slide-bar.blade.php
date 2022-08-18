@@ -19,7 +19,7 @@
                 <!-- * profile box -->
                 <!-- balance -->
                 <div class="sidebar-balance">
-                    <div class="listview-title">Balance</div>
+                    <div class="listview-title">Saldo</div>
                     <div class="in">
                         <h1 class="amount">$ 2,562.50</h1>
                     </div>
@@ -33,7 +33,7 @@
                             <div class="iconbox">
                                 <ion-icon name="add-outline"></ion-icon>
                             </div>
-                            Deposits
+                            Depósitos
                         </div>
                     </a>
                     <a href="{{ route("withdraw") }}" class="action-button">
@@ -41,7 +41,7 @@
                             <div class="iconbox">
                                 <ion-icon name="arrow-down-outline"></ion-icon>
                             </div>
-                            Withdraws
+                            Retiradas
                         </div>
                     </a>
                     <a href="{{ route("sends") }}" class="action-button">
@@ -49,7 +49,7 @@
                             <div class="iconbox">
                                 <ion-icon name="arrow-forward-outline"></ion-icon>
                             </div>
-                            Sent
+                            Envios
                         </div>
                     </a>
                     <a href="{{ route("received")}}" class="action-button">
@@ -57,7 +57,7 @@
                             <div class="iconbox">
                                 <ion-icon name="card-outline"></ion-icon>
                             </div>
-                            Received
+                            Recebidos
                         </div>
                     </a>
                 </div>
@@ -72,8 +72,18 @@
                                 <ion-icon name="pie-chart-outline"></ion-icon>
                             </div>
                             <div class="in">
-                                Overview
-                                <span class="badge badge-primary">10</span>
+                                Visão geral
+                            </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route("payments") }}" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="card-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Pagamentos
                             </div>
                         </a>
                     </li>
@@ -111,7 +121,7 @@
                 <!-- * menu -->
 
                 <!-- others -->
-                <div class="listview-title mt-1">Others</div>
+                <div class="listview-title mt-1">Outros</div>
                 <ul class="listview flush transparent no-line image-listview">
                     <li>
                         <a href="{{ route("user.config") }}" class="item">
@@ -119,7 +129,7 @@
                                 <ion-icon name="settings-outline"></ion-icon>
                             </div>
                             <div class="in">
-                                Settings
+                                Definições
                             </div>
                         </a>
                     </li>
@@ -139,7 +149,7 @@
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </div>
                             <div class="in">
-                                Log out
+                                Sair
                             </div>
                         </a>
                     </li>

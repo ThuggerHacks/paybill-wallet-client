@@ -1,10 +1,10 @@
 @extends("layouts.layout")
 
-@section("title","Transferências")
+@section("title","Pagamentos")
 
 @section("content")
 
-@include("_partials.header",["title" => "Transferências"])
+@include("_partials.header",["title" => "Pagamentos"])
 
 <!-- App Capsule -->
 <div id="appCapsule">
@@ -108,6 +108,7 @@
     </div>
     <!-- * Transactions -->
 
+    
     <div class="section mt-2 mb-2">
         <a href="#" class="btn btn-primary btn-block btn-lg">Carregar mais</a>
     </div>

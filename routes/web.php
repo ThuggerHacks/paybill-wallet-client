@@ -29,6 +29,10 @@ Route::get('/withdraws', function () {
     return view('withdraw');
 })->name("withdraw");
 
+Route::get('/payments', function () {
+    return view('payment');
+})->name("payments");
+
 Route::get('/sends', function () {
     return view('send');
 })->name("sends");

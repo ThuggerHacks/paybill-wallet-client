@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Select Wallet</h5>
+                <h5 class="modal-title">Selecionar carteira</h5>
             </div>
             <div class="modal-body">
                 <div class="action-sheet-content">
@@ -12,7 +12,7 @@
                             <div class="col-12">
                                 <div class="form-group basic">
                                     <div class="input-wrapper">
-                                        <label class="label" for="currency1">Wallet</label>
+                                        <label class="label" for="currency1">Carteira</label>
                                         <select class="form-control custom-select" id="currency1">
                                             <option value="1">Mpesa</option>
                                             <option value="2">Emola</option>
@@ -28,7 +28,7 @@
 
                         <div class="form-group basic">
                             <button type="button" class="btn btn-primary btn-block btn-lg"
-                                data-bs-dismiss="modal">Save</button>
+                                data-bs-dismiss="modal">Salvar</button>
                         </div>
                     </form>
                 </div>

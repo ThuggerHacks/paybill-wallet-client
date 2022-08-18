@@ -1,11 +1,11 @@
 @extends("layouts.layout")
 
-@section("title","Settings")
+@section("title","Definições")
 
 
 @section("content")
 
-@include("_partials.header",["title" => "Settings"])
+@include("_partials.header",["title" => "Definições"])
 
 <div id="appCapsule">
 
@@ -20,13 +20,13 @@
         </div>
     </div>
 
-    <div class="listview-title mt-1">Theme</div>
+    <div class="listview-title mt-1">Tema</div>
     <ul class="listview image-listview text inset no-line">
         <li>
             <div class="item">
                 <div class="in">
                     <div>
-                        Dark Mode
+                        Modo escuro
                     </div>
                     <div class="form-check form-switch  ms-2">
                         <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
@@ -65,12 +65,12 @@
         </li> --}}
     </ul>
 
-    <div class="listview-title mt-1">Profile Settings</div>
+    <div class="listview-title mt-1">Configurações de perfil</div>
     <ul class="listview image-listview text inset">
         <li>
             <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogForm">
                 <div class="in" style="width:60%">
-                    <div>Change Username</div>
+                    <div>Mudar nome de usuário</div>
                 </div>
                 <div  style="width:40%;text-align:end">
                     Braimo Selimane
@@ -80,7 +80,7 @@
         <li>
             <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogForm">
                 <div class="in">
-                    <div>Update E-mail</div>
+                    <div>Atualizar e-mail</div>
                 </div>
                 <div>
                     imolast66@gmail.com
@@ -90,7 +90,7 @@
         <li>
             <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogForm">
                 <div class="in">
-                    <div>Change Phone Number</div>
+                    <div>Alterar número de telefone</div>
                 </div>
                 <div>
                     +258848499142
@@ -100,7 +100,7 @@
         <li>
             <a href="#" class="item" >
                 <div class="in">
-                    <div>Birthdate</div>
+                    <div>Data de nascimento</div>
                 </div>
                 <div>
                     19/02/2002
@@ -110,7 +110,7 @@
         <li>
             <a href="#" class="item">
                 <div class="in">
-                    <div>Birthplace</div>
+                    <div>Local de nascimento</div>
                 </div>
                 <div>
                     Nampula
@@ -140,12 +140,12 @@
         </li> --}}
     </ul>
 
-    <div class="listview-title mt-1">Security</div>
+    <div class="listview-title mt-1">Segurança</div>
     <ul class="listview image-listview text mb-2 inset">
         <li>
             <a href="#" class="item" data-bs-toggle="modal" data-bs-target="#DialogForm1">
                 <div class="in">
-                    <div>Update Password</div>
+                    <div>Atualizar senha</div>
                 </div>
             </a>
         </li>

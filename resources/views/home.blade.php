@@ -12,7 +12,7 @@
             <!-- Balance -->
             <div class="balance">
                 <div class="left">
-                    <span class="title">Total Balance</span>
+                    <span class="title">Saldo total</span>
                     <h1 class="total">$ 2,562.50</h1>
                 </div>
                 <div class="right">
@@ -29,7 +29,7 @@
                         <div class="icon-wrapper bg-danger">
                             <ion-icon name="arrow-down-outline"></ion-icon>
                         </div>
-                        <strong>Withdraw</strong>
+                        <strong>Retirar</strong>
                     </a>
                 </div>
                 <div class="item">
@@ -37,7 +37,7 @@
                         <div class="icon-wrapper">
                             <ion-icon name="arrow-forward-outline"></ion-icon>
                         </div>
-                        <strong>Send</strong>
+                        <strong>Transferir</strong>
                     </a>
                 </div>
                 <div class="item">
@@ -45,7 +45,7 @@
                         <div class="icon-wrapper bg-success">
                             <ion-icon name="card-outline"></ion-icon>
                         </div>
-                        <strong>Wallets</strong>
+                        <strong>Carteiras</strong>
                     </a>
                 </div>
                 <div class="item">

@@ -1,6 +1,6 @@
 @extends("layouts.layout")
 
-@section("title","Transition - details")
+@section("title","Transition - detalhes")
 
 
 @section("content")
@@ -13,7 +13,7 @@
         </a>
     </div>
     <div class="pageTitle">
-        Transaction Detail
+        Detalhe da transação
     </div>
     <div class="right">
         <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#DialogBasic">
@@ -37,36 +37,36 @@
                     <ion-icon name="arrow-forward-outline"></ion-icon>
                 </div>
             </div>
-            <h3 class="text-center mt-2">Payment Sent</h3>
+            <h3 class="text-center mt-2">Pagamento enviado</h3>
         </div>
 
         <ul class="listview flush transparent simple-listview no-space mt-3">
             <li>
                 <strong>Status</strong>
-                <span class="text-success">Success</span>
+                <span class="text-success">Sucesso</span>
             </li>
             <li>
-                <strong>To</strong>
+                <strong>Para</strong>
                 <span>Jordi Santiago</span>
             </li>
             <li>
-                <strong>Bank Name</strong>
+                <strong>Nome do banco</strong>
                 <span>Envato Bank</span>
             </li>
             <li>
-                <strong>Transaction Category</strong>
+                <strong>Categoria de transação</strong>
                 <span>Shopping</span>
             </li>
             <li>
-                <strong>Receipt</strong>
+                <strong>Recibo</strong>
                 <span>Yes</span>
             </li>
             <li>
-                <strong>Date</strong>
+                <strong>Data e Hora</strong>
                 <span>Sep 25, 2020 10:45 AM</span>
             </li>
             <li>
-                <strong>Amount</strong>
+                <strong>Valor</strong>
                 <h3 class="m-0">$ 24</h3>
             </li>
         </ul>

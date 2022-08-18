@@ -1,10 +1,10 @@
 @extends("layouts.layout")
 
-@section("title","Deposits")
+@section("title","Depositos")
 
 @section("content")
 
-@include("_partials.header",["title" => "Deposits"])
+@include("_partials.header",["title" => "Depositos"])
 
 <!-- App Capsule -->
 <div id="appCapsule">
@@ -110,7 +110,7 @@
 
     
     <div class="section mt-2 mb-2">
-        <a href="#" class="btn btn-primary btn-block btn-lg">Load More</a>
+        <a href="#" class="btn btn-primary btn-block btn-lg">Carregar mais</a>
     </div>
 </div>
 
