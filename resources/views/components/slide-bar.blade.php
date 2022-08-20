@@ -16,7 +16,7 @@
                         @endif
                        
                     </div>
-                    <a href="#" class="btn btn-link btn-icon"  style="position:absolute;left:75%" data-bs-target="#wallet_update" data-bs-toggle="modal">
+                    <a href="#" class="btn btn-link btn-icon sidebar-close"  style="position:absolute;left:75%" data-bs-target="#wallet_update" data-bs-toggle="modal"  data-bs-dismiss="modal" onclick="closeMenu()">
                         <ion-icon name="pencil-outline"></ion-icon>
                     </a>
 
@@ -181,3 +181,10 @@
     </div>
 </div>
 <!-- * App Sidebar -->
+
+<script>
+
+    const closeMenu = () => {
+        document.querySelector("#sidebarPanel").classList.remove('show')
+    }
+</script>
