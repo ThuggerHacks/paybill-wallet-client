@@ -16,14 +16,17 @@
     </div>
     <div class="section mb-5 p-2">
 
-        <form action="#">
+        <form action="{{ route("login.make")}}" method="POST">
             @csrf
             <div class="card">
                 <div class="card-body pb-1">
+                    @if(session('error') != null)
+                      <small class="text-danger">  {{ session('error') }} </small>
+                    @endif
                     <div class="form-group basic">
                         <div class="input-wrapper">
-                            <label class="label" for="email1">E-mail</label>
-                            <input type="email" class="form-control" id="email1" placeholder="Seu e-mail">
+                            <label class="label" for="email1">E-mail ou celular</label>
+                            <input type="text" class="form-control" id="email1" name="login" placeholder="Seu e-mail">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -33,7 +36,7 @@
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="password1">Senha</label>
-                            <input type="password" class="form-control" id="password1" autocomplete="off"
+                            <input type="password" class="form-control" name="password" id="password1" autocomplete="off"
                                 placeholder="Sua Senha">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>

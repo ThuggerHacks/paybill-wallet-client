@@ -1,59 +1,52 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAuth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/login', [UserAuth::class,"login"])->middleware("login.guard")->name("login");
+
+Route::post("/login", [UserAuth::class, "makeLogin"])->middleware("login.guard")->name("login.make");
+
+Route::get('/register', [UserAuth::class,"register"])->middleware("login.guard")->name("register");
+
+Route::post("/register",[UserAuth::class,"registerMake"])->middleware("login.guard")->name("register.make");
+
+Route::get('/forgot/password', [UserAuth::class,"forgot"])->middleware("login.guard")->name("forgot.password");
+
+Route::get("/logout",[UserAuth::class, "logout"])->name("logout");
+
+Route::get("/verify-email",function(){
+    return view("email");
+})->middleware("email.verify.middleware")->name("email.verify");
 
 Route::get('/', function () {
     return view('home');
-})->name("home");
+})->middleware('guard')->name("home");
 
 Route::get('/user', function () {
     return view('user');
-})->name("user.config");
+})->middleware('guard')->name("user.config");
 
 Route::get('/deposits', function () {
     return view('deposits');
-})->name("deposits");
+})->middleware('guard')->name("deposits");
 
 Route::get('/withdraws', function () {
     return view('withdraw');
-})->name("withdraw");
+})->middleware('guard')->name("withdraw");
 
 Route::get('/payments', function () {
     return view('payment');
-})->name("payments");
+})->middleware('guard')->name("payments");
 
 Route::get('/sends', function () {
     return view('send');
-})->name("sends");
+})->middleware('guard')->name("sends");
 
 Route::get('/received', function () {
     return view('received');
-})->name("received");
+})->middleware('guard')->name("received");
 
 Route::get('/transation/{id?}', function ($id=0) {
     return view('transation');
-})->name("transation.details");
-
-Route::get('/login', function ($id=0) {
-    return view('login');
-})->name("login");
-
-Route::get('/register', function ($id=0) {
-    return view('register');
-})->name("register");
-
-Route::get('/forgot/password', function ($id=0) {
-    return view('forgot');
-})->name("forgot.password");
-
+})->middleware('guard')->name("transation.details");

@@ -15,14 +15,31 @@
         <h4>Crie a sua conta aqui</h4>
     </div>
     <div class="section mb-5 p-2">
-        <form action="#">
+        <form action="{{ route("register.make")}}" method="POST">
             @csrf
             <div class="card">
                 <div class="card-body">
+                    @if(session('error') != null)
+                        <small class="text-danger">  {{ session('error') }} </small>
+                    @endif
+                    @if(session('success') != null)
+                        <small class="text-success">  {{ session('success') }} </small>
+                    @endisset
+                    <div class="form-group basic">
+                        <div class="input-wrapper">
+                            <label class="label" for="name1">Nome completo</label>
+                            <input type="text" class="form-control" id="name1" name="user_name" placeholder="Seu nome" value="{{ old("user_name")}}">
+                            <i class="clear-input">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </i>
+                        </div>
+                    </div>
+
+
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="email1">E-mail</label>
-                            <input type="email" class="form-control" id="email1" placeholder="Seu e-mail">
+                            <input type="email" class="form-control" id="email1" name="user_email" placeholder="Seu e-mail" value="{{ old("user_email")}}">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -32,7 +49,7 @@
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="phone">Número de telefone</label>
-                            <input type="number" class="form-control" id="phone" placeholder="Seu Número de telefone">
+                            <input type="number" class="form-control" id="phone" placeholder="Seu Número de telefone" name="user_phone_number" value="{{ old("user_phone_number")}}">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -42,7 +59,7 @@
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="birthdate">Data de nascimento</label>
-                            <input type="date" class="form-control" id="birthdate" placeholder="Sua Data de nascimento">
+                            <input type="date" class="form-control" id="birthdate" placeholder="Sua Data de nascimento" name="user_birthdate" value="{{ old("user_birthdate")}}">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -52,7 +69,7 @@
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="birthplace">Local de nascimento</label>
-                            <input type="text" class="form-control" id="birthplace" placeholder="Local de nascimento">
+                            <input type="text" class="form-control" id="birthplace" placeholder="Local de nascimento" name="user_birthplace" value="{{ old("user_birthplace")}}">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -63,7 +80,7 @@
                         <div class="input-wrapper">
                             <label class="label" for="password1">Senha</label>
                             <input type="password" class="form-control" id="password1" autocomplete="off"
-                                placeholder="Senha">
+                                placeholder="Senha" name="user_password">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -74,7 +91,7 @@
                         <div class="input-wrapper">
                             <label class="label" for="password2">Confirme a Senha</label>
                             <input type="password" class="form-control" id="password2" autocomplete="off"
-                                placeholder="Digite a senha novamente">
+                                placeholder="Digite a senha novamente" name="user_confirm_password">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -83,7 +100,7 @@
 
                     <div class="custom-control custom-checkbox mt-2 mb-1">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="customCheckb1">
+                            <input type="checkbox" class="form-check-input" id="customCheckb1" name="checkbox">
                             <label class="form-check-label" for="customCheckb1">
                                 Concordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">termos e
                                     condições</a>

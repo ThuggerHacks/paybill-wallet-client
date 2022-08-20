@@ -144,7 +144,7 @@
                         </a>
                     </li> --}}
                     <li>
-                        <a href="{{ route("login") }}" class="item">
+                        <a href="{{ route("logout") }}" class="item">
                             <div class="icon-box bg-primary">
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </div>
