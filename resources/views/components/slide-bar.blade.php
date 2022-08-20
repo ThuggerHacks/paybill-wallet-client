@@ -4,24 +4,41 @@
         <div class="modal-content">
             <div class="modal-body p-0">
                 <!-- profile box -->
-                <div class="profileBox pt-2 pb-2">
-                    <div class="image-wrapper">
-                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged  w36">
-                    </div>
+                <div class="profileBox pt-2 pb-1">
                     <div class="in">
-                        <strong>Sebastian Doe</strong>
-                        <div class="text-muted">4029209</div>
+                        @if(isset($wallets))
+                            @foreach ($wallets as $wallet)
+                                @if($wallet['wallet_activated_status'])
+                                    <strong>{{ $wallet['wallet_title'] }}</strong>
+                                    <div class="text-muted">{{ $wallet['wallet_id'] }}</div>
+                                @endif
+                            @endforeach
+                        @endif
+                       
                     </div>
+                    <a href="#" class="btn btn-link btn-icon"  style="position:absolute;left:75%" data-bs-target="#wallet_update" data-bs-toggle="modal">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                    </a>
+
                     <a href="#" class="btn btn-link btn-icon sidebar-close" data-bs-dismiss="modal">
                         <ion-icon name="close-outline"></ion-icon>
                     </a>
+    
                 </div>
                 <!-- * profile box -->
                 <!-- balance -->
                 <div class="sidebar-balance">
                     <div class="listview-title">Saldo</div>
                     <div class="in">
-                        <h1 class="amount">$ 2,562.50</h1>
+                        <h1 class="amount">
+                            @if(isset($wallets))
+                                @foreach ($wallets as $wallet)
+                                    @if($wallet['wallet_activated_status'])
+                                        {{number_format( $wallet['wallet_money'],2)}} mzn
+                                    @endif
+                                @endforeach
+                            @endif
+                        </h1>
                     </div>
                 </div>
                 <!-- * balance -->
@@ -159,7 +176,7 @@
                 <!-- * others -->
 
                 <!-- send money -->
-                
+               
         </div>
     </div>
 </div>

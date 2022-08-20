@@ -22,6 +22,8 @@ Route::get('/transation/{id?}', [Home::class, "transation"])->middleware('guard'
 
 Route::post("/wallet",[Home::class, "createWallet"])->middleware('guard')->name("wallet.create");
 
+Route::put("/wallet/update/{id?}",[Home::class, "updateWallet"])->middleware('guard')->name("wallet.update");
+
 Route::post("/transfer",[Home::class,"createTransfer"])->middleware('guard')->name("transfer.create");
 
 Route::post("/activate/wallet",[Home::class,"activateWallet"])->middleware('guard')->name("activate.wallet");

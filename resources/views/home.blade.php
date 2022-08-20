@@ -14,14 +14,12 @@
                 <div class="left">
                     <span class="title">Saldo total</span>
                     <h1 class="total">
+                        @php($wallet_id = 0)
                         @if(isset($wallets))
                             @foreach ($wallets as $wallet)
                                 @if($wallet['wallet_activated_status'])
                                      {{number_format( $wallet['wallet_money'],2)}} mzn
-                                     <div class="row my-2 mb-2" style="line-height: 20px">
-                                         <small style="font-size:13px;color:black" class="col-md-12">Carteira: {{ $wallet['wallet_title'] }}</small>
-                                         <small style="font-size:13px;color:black" class="col-md-12">N&uacute;mero: {{ $wallet['wallet_id'] }}</small>
-                                     </div>
+                                     @php($wallet_id = $wallet['wallet_id'] )
                                 @endif
                             @endforeach
                         @endif
@@ -81,6 +79,7 @@
     @include("_partials.sent")
     @include("_partials.wallets")
     @include("_partials.new_wallet")
+    @include("_partials.wallet_update",["wallet_id" => $wallet_id])
 
      <!-- Stats -->
      <div class="section">
@@ -119,7 +118,7 @@
     <x-transation></x-transation>
     <x-footer></x-footer>
     <x-bottom-tab :user="true" :config="false" ></x-bottom-tab>
-    <x-slide-bar></x-slide-bar>
+    <x-slide-bar :wallets="$wallets"></x-slide-bar>
 </div>
 
 

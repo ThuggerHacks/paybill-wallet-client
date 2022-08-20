@@ -95,6 +95,85 @@ class Home extends Controller
         }
     }
 
+    public function updateWallet(Request $request, $id){
+
+        try{
+            $phone = $request->wallet_associated_phone_number;
+            $title = $request->wallet_title;
+            
+            if($phone){
+                //update phone number
+                
+                $phone_update = Http::withHeaders([
+                    'Accept' => 'application/json',
+                    'access_token' => $request->session()->get('user_token')
+                ])->put(config("constants.paybill_api").'/wallet/update/phone/'.$id,[
+                    'wallet_associated_phone_number' => $phone
+                ]);
+
+
+                //checking for errors
+                if( isset($phone_update['errors'])) {
+                    //errors collector
+                    $errors = [];
+
+                    //collect all errors and convert its position tonumerical, since its coming in array key value
+
+                    foreach($phone_update['errors'] as $error){
+                        $errors = $error;
+                    }
+
+                    //redirect with input validation errors
+                    return redirect()->route("home")->with("error", $errors[0]);
+
+                }else if ( isset($phone_update['error'])){
+                    //redirect with database errors ( exists, maximum,etc)
+                    return redirect()->route("home")->with("error", $phone_update['error']);
+                }else if(isset($phone_update['success'])){
+                    return redirect()->route("home")->with("success", $phone_update['success']);
+                }
+            }else if($title){
+                    //update title
+
+                $title_update = Http::withHeaders([
+                    'Accept' => 'application/json',
+                    'access_token' => $request->session()->get('user_token')
+                ])->put(config("constants.paybill_api")."/wallet/update/title/".$id,[
+                    'wallet_title' => $title
+                ]);
+
+
+                //checking for errors
+                if( isset($title_update['errors'])) {
+                //errors collector
+                    $errors = [];
+
+                    //collect all errors and convert its position tonumerical, since its coming in array key value
+
+                    foreach($title_update['errors'] as $error){
+                        $errors = $error;
+                    }
+
+                    //redirect with input validation errors
+                    return redirect()->route("home")->with("error", $errors[0]);
+
+                }else if ( isset($title_update['error'])){
+                    //redirect with database errors ( exists, maximum,etc)
+                    return redirect()->route("home")->with("error", $title_update['error']);
+                }else if(isset($title_update['success'])){
+                    return redirect()->route("home")->with("success", $title_update['success']);
+                }else{
+                    return redirect()->route("home")->with("error", "Houve um erro, volte a tentar mais tarde");
+                }
+            }else{
+                return redirect()->route("home")->with("error", "Por favor preencha pelomenos um campo");
+            }
+        }catch( Exception $ex){
+            return redirect()->route("home")->with("error", "Houve um erro, volte a tentar mais tarde");
+        }
+  
+    }
+
     public function createTransfer(Request $request){
 
         try{
