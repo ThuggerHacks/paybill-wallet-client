@@ -18,35 +18,3 @@ Route::get("/logout",[UserAuth::class, "logout"])->name("logout");
 Route::get("/verify-email",function(){
     return view("email");
 })->middleware("email.verify.middleware")->name("email.verify");
-
-Route::get('/', function () {
-    return view('home');
-})->middleware('guard')->name("home");
-
-Route::get('/user', function () {
-    return view('user');
-})->middleware('guard')->name("user.config");
-
-Route::get('/deposits', function () {
-    return view('deposits');
-})->middleware('guard')->name("deposits");
-
-Route::get('/withdraws', function () {
-    return view('withdraw');
-})->middleware('guard')->name("withdraw");
-
-Route::get('/payments', function () {
-    return view('payment');
-})->middleware('guard')->name("payments");
-
-Route::get('/sends', function () {
-    return view('send');
-})->middleware('guard')->name("sends");
-
-Route::get('/received', function () {
-    return view('received');
-})->middleware('guard')->name("received");
-
-Route::get('/transation/{id?}', function ($id=0) {
-    return view('transation');
-})->middleware('guard')->name("transation.details");

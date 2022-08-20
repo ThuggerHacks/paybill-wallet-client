@@ -13,7 +13,7 @@
             <div class="balance">
                 <div class="left">
                     <span class="title">Saldo total</span>
-                    <h1 class="total">$ 2,562.50</h1>
+                    <h1 class="total">$ 0.0</h1>
                 </div>
                 <div class="right">
                     <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
@@ -49,11 +49,11 @@
                     </a>
                 </div>
                 <div class="item">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exchangeActionSheet">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#wallet_new" id="wallet_">
                         <div class="icon-wrapper bg-warning">
-                            <ion-icon name="swap-vertical"></ion-icon>
+                            <ion-icon name="add"></ion-icon>
                         </div>
-                        <strong>Exchange</strong>
+                        <strong>Nova carteira</strong>
                     </a>
                 </div>
 
@@ -67,6 +67,7 @@
     @include("_partials.withdraw")
     @include("_partials.sent")
     @include("_partials.wallets")
+    @include("_partials.new_wallet")
 
      <!-- Stats -->
      <div class="section">
@@ -100,7 +101,7 @@
         </div>
     </div>
     <!-- * Stats -->
-
+    {{-- <x-modal-info></x-modal-info> --}}
     <x-transation></x-transation>
     <x-footer></x-footer>
     <x-bottom-tab :user="true" :config="false" ></x-bottom-tab>
@@ -114,4 +115,5 @@
 <script>
     // Add to Home with 2 seconds delay.
     AddtoHome("2000", "once");
+
 </script>
