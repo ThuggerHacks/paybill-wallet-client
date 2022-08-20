@@ -13,7 +13,19 @@
             <div class="balance">
                 <div class="left">
                     <span class="title">Saldo total</span>
-                    <h1 class="total">$ 0.0</h1>
+                    <h1 class="total">
+                        @if(isset($wallets))
+                            @foreach ($wallets as $wallet)
+                                @if($wallet['wallet_activated_status'])
+                                     {{number_format( $wallet['wallet_money'],2)}} mzn
+                                     <div class="row my-2 mb-2" style="line-height: 20px">
+                                         <small style="font-size:13px;color:black" class="col-md-12">Carteira: {{ $wallet['wallet_title'] }}</small>
+                                         <small style="font-size:13px;color:black" class="col-md-12">N&uacute;mero: {{ $wallet['wallet_id'] }}</small>
+                                     </div>
+                                @endif
+                            @endforeach
+                        @endif
+                    </h1>
                 </div>
                 <div class="right">
                     <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet">
@@ -49,6 +61,7 @@
                     </a>
                 </div>
                 <div class="item">
+                    
                     <a href="#" data-bs-toggle="modal" data-bs-target="#wallet_new" id="wallet_">
                         <div class="icon-wrapper bg-warning">
                             <ion-icon name="add"></ion-icon>
@@ -100,8 +113,9 @@
             </div>
         </div>
     </div>
+   
     <!-- * Stats -->
-    {{-- <x-modal-info></x-modal-info> --}}
+    <x-modal-info></x-modal-info>
     <x-transation></x-transation>
     <x-footer></x-footer>
     <x-bottom-tab :user="true" :config="false" ></x-bottom-tab>

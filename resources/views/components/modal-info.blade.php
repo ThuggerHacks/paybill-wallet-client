@@ -1,23 +1,35 @@
-<!-- DialogIconedSuccess -->
-<div class="modal fade dialogbox" id="DialogIconedSuccess" data-bs-backdrop="static" tabindex="-1"
-role="dialog">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-icon text-success">
-            <ion-icon name="checkmark-circle"></ion-icon>
-        </div>
-        <div class="modal-header">
-            <h5 class="modal-title">Success</h5>
-        </div>
-        <div class="modal-body">
-            Your payment has been sent.
-        </div>
-        <div class="modal-footer">
-            <div class="btn-inline">
-                <a href="#" class="btn" data-bs-dismiss="modal">CLOSE</a>
+@if( session('error') != null || session('success') != null )
+
+
+    <!-- ios style 8 -->
+    
+    <div id="notification-12" class="notification-box tap-to-close show">
+        <div class="notification-dialog ios-style">
+            <div class="notification-header">
+                <div class="in">
+                    {{-- <img src="assets/img/sample/avatar/avatar3.jpg" alt="image" class="imaged w24 rounded">
+                    <strong>John Pacheco</strong> --}}
+                </div>
+                <div class="right">
+                    <a href="#" class="close-button">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </a>
+                </div>
+            </div>
+            <div class="notification-content">
+                <div class="in">
+                    <h3 class="subtitle">Clique para fechar</h3>
+                    <div class="text">
+                        @if( session('success') != null)
+                            <span class="text-success">{{ session('success') }}</span>
+                        @elseif ( session('error') != null)
+                             <span class="text-danger">{{ session('error') }}</span>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<!-- * DialogIconedSuccess -->
+    <!-- * ios style 8 -->
+
+@endif

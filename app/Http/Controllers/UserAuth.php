@@ -76,6 +76,7 @@ class UserAuth extends Controller
                     $errors = [];
 
                     //armazenar erros no array para conseguir pegar atraves de posicoes numericas e nao chaves 'string'
+                    
                     foreach( $resp['errors'] as $error){
                         $errors = $error;
                     }
