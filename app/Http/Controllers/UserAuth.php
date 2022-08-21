@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class UserAuth extends Controller
 {
@@ -211,6 +212,51 @@ class UserAuth extends Controller
         }catch(Exception $ex){
 
         }
+    }
+
+    public function userUpdatePhoto(Request $request){
+
+       try{
+            $file = $request->file('file1');
+            $extension = $file->getClientOriginalExtension();
+            $name = 'paybill_profile_photo_'.rand(100000000,999999999).'.'.$extension;
+
+            $user = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/user/profile');
+
+            
+
+            if($extension != 'png' && $extension != 'jpg' && $extension != 'jpeg'){
+
+                return redirect()->back()->with('error','Ficheiro invalido');
+            }
+
+            $update_photo = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->put(config('constants.paybill_api').'/user/update/photo',[
+                'file' => $name
+            ]);
+
+
+            if(isset($update_photo['error'])){
+                return redirect()->back()->with('error',$update_photo['error']);
+            }else if( isset($update_photo['success'])){
+
+                if(Storage::exists('avatars/'.$user['user_profile'])){
+                    Storage::delete('avatars/'.$user['user_profile']);
+                }
+
+                $file->storeAs('avatars',$name);
+                return redirect()->back()->with('success',$update_photo['success']);
+
+            }
+       }catch(Exception $ex){
+           return redirect()->back();
+       }
+
     }
 
     public function forgot () {

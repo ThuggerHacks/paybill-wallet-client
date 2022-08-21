@@ -19,6 +19,8 @@ Route::put("/password/change",[UserAuth::class,"changePassword"])->middleware("g
 
 Route::put("/user/profile",[UserAuth::class, "userProfile"])->middleware("guard")->name("change.profile");
 
+//Route::put("/user/photo",[UserAuth::class,"userUpdatePhoto"])->middleware("guard")->name("change.photo");
+
 Route::get("/verify-email",function(){
     return view("email");
 })->middleware("email.verify.middleware")->name("email.verify");

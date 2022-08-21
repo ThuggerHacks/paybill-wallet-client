@@ -14,14 +14,14 @@
                                 <label class="label" for="account2">A partir de</label>
                                 <select class="form-control custom-select" id="account2"name="from">
                                     @if(isset($wallets))
-                                    @foreach ($wallets as $wallet)
-                                       @if($wallet['wallet_activated_status'])
-                                            <option value="{{ base64_encode($wallet['wallet_id']) }}" selected>{{ $wallet['wallet_title'] }}</option>
-                                       @else
-                                            <option value="{{ base64_encode($wallet['wallet_id']) }}" >{{ $wallet['wallet_title'] }}</option>
-                                       @endif
-                                    @endforeach
-                                @endif
+                                        @foreach ($wallets as $wallet)
+                                            @if($wallet['wallet_activated_status'])
+                                                    <option value="{{ base64_encode($wallet['wallet_id']) }}" selected>{{ $wallet['wallet_title'] }}</option>
+                                            @else
+                                                    <option value="{{ base64_encode($wallet['wallet_id']) }}" >{{ $wallet['wallet_title'] }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>

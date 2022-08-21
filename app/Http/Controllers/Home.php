@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Home extends Controller
 {
     public  function index(Request $request) {
-
+        
         try{
 
             $my_wallets = Http::withHeaders([
@@ -226,6 +226,69 @@ class Home extends Controller
         }catch( Exception $ex){
 
             return redirect()->back();
+        }
+    }
+
+    public function createDeposit(Request $request){
+
+        try{
+            $deposit = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->post(config("constants.paybill_api").'/deposit/make',[
+                "amount" => $request->amount,
+                "from" => '258'.$request->from,
+                "to" => base64_decode($request->to)
+            ]);
+
+             //checking for errors
+             if(isset($deposit['errors'])){
+
+                $errors = [];
+
+                foreach($deposit['errors'] as $error){
+                    $errors = $error;
+                }
+
+                return redirect()->route('home')->with('error', $errors[0]);
+            }else if(isset($deposit['error'])){
+                return redirect()->route('home')->with('error', $deposit['error']);
+            }else if(isset($deposit['success'])){
+                return redirect()->route('home')->with('success', $deposit['success']);
+            }
+        }catch(Exception $ex){
+            return redirect()->back()->with('error','Houve um erro');
+        }
+    }
+
+    public function createWithdraw(Request $request){
+
+        try{
+            $withdraw = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->post(config("constants.paybill_api").'/withdraw',[
+                "amount" => $request->amount,
+                "from" => base64_decode($request->from)
+            ]);
+
+             //checking for errors
+             if(isset($withdraw['errors'])){
+
+                $errors = [];
+
+                foreach($withdraw['errors'] as $error){
+                    $errors = $error;
+                }
+
+                return redirect()->route('home')->with('error', $errors[0]);
+            }else if(isset($withdraw['error'])){
+                return redirect()->route('home')->with('error', $withdraw['error']);
+            }else if(isset($withdraw['success'])){
+                return redirect()->route('home')->with('success', $withdraw['success']);
+            }
+        }catch(Exception $ex){
+            return redirect()->back()->with('error','Houve um erro');
         }
     }
 
