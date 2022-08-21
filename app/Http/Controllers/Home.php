@@ -15,6 +15,7 @@ class Home extends Controller
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
             ])->get(config("constants.paybill_api").'/wallet/user');
+            
 
             return view('home',["wallets" => $my_wallets['data']]);
 
@@ -23,8 +24,18 @@ class Home extends Controller
         }
     }
 
-    public function config() {
-        return view('user');
+    public function config(Request $request) {
+
+        try{
+            $user = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/user/profile');
+    
+            return view('user',['data' => $user]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
     }
 
     public function deposits() {
@@ -100,6 +111,7 @@ class Home extends Controller
         try{
             $phone = $request->wallet_associated_phone_number;
             $title = $request->wallet_title;
+            $phone_updated = false;
             
             if($phone){
                 //update phone number
@@ -113,7 +125,7 @@ class Home extends Controller
 
 
                 //checking for errors
-                if( isset($phone_update['errors'])) {
+                if( isset($phone_update['errors']) && !$title) {
                     //errors collector
                     $errors = [];
 
@@ -126,10 +138,11 @@ class Home extends Controller
                     //redirect with input validation errors
                     return redirect()->route("home")->with("error", $errors[0]);
 
-                }else if ( isset($phone_update['error'])){
+                }else if ( isset($phone_update['error']) && !$title ){
                     //redirect with database errors ( exists, maximum,etc)
                     return redirect()->route("home")->with("error", $phone_update['error']);
-                }else if(isset($phone_update['success'])){
+                }else if(isset($phone_update['success']) && !$title){
+                    $phone_updated = true;
                     return redirect()->route("home")->with("success", $phone_update['success']);
                 }
             }
@@ -147,7 +160,7 @@ class Home extends Controller
 
 
                 //checking for errors
-                if( isset($title_update['errors'])) {
+                if( isset($title_update['errors']) && $phone_updated == false) {
                 //errors collector
                     $errors = [];
 
@@ -160,10 +173,10 @@ class Home extends Controller
                     //redirect with input validation errors
                     return redirect()->route("home")->with("error", $errors[0]);
 
-                }else if ( isset($title_update['error'])){
+                }else if ( isset($title_update['error']) && $phone_updated == false){
                     //redirect with database errors ( exists, maximum,etc)
                     return redirect()->route("home")->with("error", $title_update['error']);
-                }else if(isset($title_update['success'])){
+                }else if(isset($title_update['success']) && $phone_updated == false){
                     return redirect()->route("home")->with("success", $title_update['success']);
                 }else{
                     return redirect()->route("home")->with("error", "Houve um erro, volte a tentar mais tarde");

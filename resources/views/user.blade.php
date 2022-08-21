@@ -73,7 +73,7 @@
                     <div>Mudar nome de usuário</div>
                 </div>
                 <div  style="width:40%;text-align:end">
-                    Braimo Selimane
+                   {{ ucwords($data['user_name'])}}
                 </div>
             </a>
         </li>
@@ -83,7 +83,7 @@
                     <div>Atualizar e-mail</div>
                 </div>
                 <div>
-                    imolast66@gmail.com
+                   {{ $data['user_email']}}
                 </div>
             </a>
         </li>
@@ -93,17 +93,17 @@
                     <div>Alterar número de telefone</div>
                 </div>
                 <div>
-                    +258848499142
+                    {{ $data['user_phone_number']}}
                 </div>
             </a>
         </li>
         <li>
             <a href="#" class="item" >
-                <div class="in">
+                <div class="in" style="width:60%">
                     <div>Data de nascimento</div>
                 </div>
-                <div>
-                    19/02/2002
+                <div style="width:40%;text-align:end">
+                    {{ $data['user_birthdate']}}
                 </div>
             </a>
         </li>
@@ -113,7 +113,7 @@
                     <div>Local de nascimento</div>
                 </div>
                 <div>
-                    Nampula
+                    {{ $data['user_birthplace']}}
                 </div>
             </a>
         </li>
@@ -175,7 +175,7 @@
 
 @include("components.modal-info")
 <x-change-password></x-change-password>
-<x-user-data-modal :name="true" :email="true" :number="true"></x-user-data-modal>
+<x-user-data-modal :name="$data['user_name']" :email="$data['user_email']" :number="$data['user_phone_number']"></x-user-data-modal>
 <x-picture-modal></x-picture-modal>
 <x-bottom-tab :user="false" :config="true" ></x-bottom-tab>
 

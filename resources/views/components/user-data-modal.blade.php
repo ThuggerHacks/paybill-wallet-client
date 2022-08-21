@@ -14,8 +14,8 @@
                             <div class="form-group basic">
                                 <div class="input-wrapper">
                                     <label class="label" for="text1">Digite o novo nome</label>
-                                    <input type="text" class="form-control" id="text1" name="user_name">
-                                    <i class="clear-input">
+                                    <input type="text" class="form-control" id="text1" name="user_name" value="{{ $name }}">
+                                    <i class="clear-input" >
                                         <ion-icon name="close-circle"></ion-icon>
                                     </i>
                                 </div>
@@ -27,7 +27,7 @@
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="text2">Digite o novo e-mail</label>
-                                <input type="email" class="form-control" id="text2" name="user_email">
+                                <input type="email" class="form-control" id="text2" name="user_email"  value="{{ $email }}">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>
@@ -41,7 +41,7 @@
                         <div class="form-group basic">
                             <div class="input-wrapper">
                                 <label class="label" for="text3">Digite o novo número de telefone</label>
-                                <input type="number" class="form-control" id="text3" name="user_phone_number">
+                                <input type="number" class="form-control" id="text3" name="user_phone_number"  value="{{ explode("258",$number)[1] }}">
                                 <i class="clear-input">
                                     <ion-icon name="close-circle"></ion-icon>
                                 </i>

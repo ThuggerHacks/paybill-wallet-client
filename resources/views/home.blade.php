@@ -79,7 +79,7 @@
     @include("_partials.sent")
     @include("_partials.wallets")
     @include("_partials.new_wallet")
-    @include("_partials.wallet_update",["wallet_id" => $wallet_id])
+    @include("_partials.wallet_update",["wallet_id" => $wallet_id,"data" => $wallets])
 
      <!-- Stats -->
      <div class="section">
@@ -114,7 +114,7 @@
     </div>
    
     <!-- * Stats -->
-    <x-modal-info></x-modal-info>
+    <x-modal-info ></x-modal-info>
     <x-transation></x-transation>
     <x-footer></x-footer>
     <x-bottom-tab :user="true" :config="false" ></x-bottom-tab>
