@@ -15,6 +15,10 @@ Route::get('/forgot/password', [UserAuth::class,"forgot"])->middleware("login.gu
 
 Route::get("/logout",[UserAuth::class, "logout"])->name("logout");
 
+Route::put("/password/change",[UserAuth::class,"changePassword"])->middleware("guard")->name("change.password");
+
+Route::put("/user/profile",[UserAuth::class, "userProfile"])->middleware("guard")->name("change.profile");
+
 Route::get("/verify-email",function(){
     return view("email");
 })->middleware("email.verify.middleware")->name("email.verify");

@@ -132,7 +132,10 @@ class Home extends Controller
                 }else if(isset($phone_update['success'])){
                     return redirect()->route("home")->with("success", $phone_update['success']);
                 }
-            }else if($title){
+            }
+            
+            
+            if($title){
                     //update title
 
                 $title_update = Http::withHeaders([
@@ -165,7 +168,9 @@ class Home extends Controller
                 }else{
                     return redirect()->route("home")->with("error", "Houve um erro, volte a tentar mais tarde");
                 }
-            }else{
+            }
+            
+            if(!$title && !$phone){
                 return redirect()->route("home")->with("error", "Por favor preencha pelomenos um campo");
             }
         }catch( Exception $ex){

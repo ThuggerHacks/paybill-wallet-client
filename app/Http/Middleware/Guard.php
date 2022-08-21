@@ -36,8 +36,10 @@ class Guard
 
         //verifying if email is verified
 
-        if(!$user['user_email_verified']){
-            return redirect()->route("email.verify");
+        if(isset($user['user_email_verified'])){
+            if(!$user['user_email_verified']){
+                return redirect()->route("email.verify");
+            }
         }
 
 

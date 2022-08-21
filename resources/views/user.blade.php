@@ -12,7 +12,7 @@
     <div class="section mt-3 text-center">
         <div class="avatar-section">
             <a href="#" data-bs-toggle="modal" data-bs-target="#DialogImage">
-                <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w100 rounded">
+                <img src="{{ asset("assets/img/sample/avatar/avatar1.jpg")}}" alt="avatar" class="imaged w100 rounded">
                 <span class="button">
                     <ion-icon name="camera-outline"></ion-icon>
                 </span>
@@ -173,8 +173,9 @@
 
 </div>
 
+@include("components.modal-info")
 <x-change-password></x-change-password>
-<x-user-data-modal></x-user-data-modal>
+<x-user-data-modal :name="true" :email="true" :number="true"></x-user-data-modal>
 <x-picture-modal></x-picture-modal>
 <x-bottom-tab :user="false" :config="true" ></x-bottom-tab>
 

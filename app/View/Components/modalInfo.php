@@ -11,9 +11,16 @@ class modalInfo extends Component
      *
      * @return void
      */
-    public function __construct()
+
+     public $name = false;
+     public $number = false;
+     public $email = false;
+
+    public function __construct($nome,$numero,$email)
     {
-        //
+        $this->nome = $nome;
+        $this->numero = $numero;
+        $this->email = $email;
     }
 
     /**

@@ -5,45 +5,57 @@
             <div class="modal-header">
                 <h5 class="modal-title">MUDAR PERFIL</h5>
             </div>
-            <form>
+            <form action="{{ route("change.profile")}}" method="POST">
+                @csrf
+                @method("PUT")
                 <div class="modal-body text-start mb-2">
 
-                    <div class="form-group basic">
-                        <div class="input-wrapper">
-                            <label class="label" for="text1">Digite o novo nome</label>
-                            <input type="text" class="form-control" id="text1" >
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
-                    </div>
+                    @if($name)
+                            <div class="form-group basic">
+                                <div class="input-wrapper">
+                                    <label class="label" for="text1">Digite o novo nome</label>
+                                    <input type="text" class="form-control" id="text1" name="user_name">
+                                    <i class="clear-input">
+                                        <ion-icon name="close-circle"></ion-icon>
+                                    </i>
+                                </div>
+                            </div>
+                    @endif
 
-                    <div class="form-group basic">
-                        <div class="input-wrapper">
-                            <label class="label" for="text2">Digite o novo e-mail</label>
-                            <input type="email" class="form-control" id="text2" >
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
-                    </div>
+                    @if($email)
 
-                    <div class="form-group basic">
-                        <div class="input-wrapper">
-                            <label class="label" for="text3">Digite o novo número de telefone</label>
-                            <input type="number" class="form-control" id="text3">
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="text2">Digite o novo e-mail</label>
+                                <input type="email" class="form-control" id="text2" name="user_email">
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                            </div>
                         </div>
-                    </div>
+
+                    @endif
+
+                    @if($number)
+
+                        <div class="form-group basic">
+                            <div class="input-wrapper">
+                                <label class="label" for="text3">Digite o novo número de telefone</label>
+                                <input type="number" class="form-control" id="text3" name="user_phone_number">
+                                <i class="clear-input">
+                                    <ion-icon name="close-circle"></ion-icon>
+                                </i>
+                            </div>
+                        </div>
+
+                    @endif
 
                 </div>
                 <div class="modal-footer">
                     <div class="btn-inline">
                         <button type="button" class="btn btn-text-secondary"
                             data-bs-dismiss="modal">CANCELAR</button>
-                        <button type="button" class="btn btn-text-primary"
+                        <button type="submit" class="btn btn-text-primary"
                             data-bs-dismiss="modal">MUDAR</button>
                     </div>
                 </div>

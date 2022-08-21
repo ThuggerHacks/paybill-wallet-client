@@ -115,6 +115,104 @@ class UserAuth extends Controller
         }
     }
 
+    public function changePassword(Request $request){
+        
+        try{
+
+            $user = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->put(config("constants.paybill_api").'/user/update/password',[
+                "user_password" => $request->user_password,
+                "user_new_password" => $request->user_new_password,
+                "user_confirm_new_password" => $request->user_confirm_new_password
+            ]);
+
+            //if success 
+            if(isset($user['success'])){
+                return redirect()->route('user.config')->with("success", $user['success']);
+            }else{
+                //if any error of data
+                if(isset($user['error'])){
+                    $request->session()->flash("error",$user['error']);
+                    return redirect()->route('user.config');
+                }else if(isset($user['errors'])){
+                    //declarar array para armazenar erros
+                    $errors = [];
+
+                    //armazenar erros no array para conseguir pegar atraves de posicoes numericas e nao chaves 'string'
+                    
+                    foreach( $user['errors'] as $error){
+                        $errors = $error;
+                    }
+                    $request->session()->flash("error",$errors[count($errors)-1]);
+                    return redirect()->route('user.config');
+
+                }
+            }
+
+        }catch( Exception $ex){
+
+            return redirect()->route('user.config');
+        }
+    }
+
+    public function userProfile(Request $request){
+
+        try{
+
+            //getting user data from server
+            $me = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config('constants.paybill_api').'/user/profile');
+
+            if($me){
+                //updating what he wishes to(phone, name or email)
+ 
+                $update = Http::withHeaders([
+                    'Accept' => 'application/json',
+                    'access_token' => $request->session()->get('user_token')
+                ])->put(config("constants.paybill_api").'/user/update',[
+                    "user_name" => $request->user_name  ? $request->user_name:$me['user_name'],
+                    "user_email" => $request->user_email ? $request->user_email : $me['user_email'],
+                    "user_phone_number" => $request->user_phone_number ? $request->user_phone_number : explode("258",$me['user_phone_number'])[1]
+                ]);
+                
+                //if any errors
+
+                //if success 
+                if(isset($update['success'])){
+                    return redirect()->route('user.config')->with("success", $update['success']);
+                }else{
+                //if any error of data
+                if(isset($update['error'])){
+                    $request->session()->flash("error",$update['error']);
+                    return redirect()->route('user.config');
+                    }else if(isset($update['errors'])){
+                        //declarar array para armazenar erros
+                        $errors = [];
+
+                        //armazenar erros no array para conseguir pegar atraves de posicoes numericas e nao chaves 'string'
+                        
+                        foreach( $update['errors'] as $error){
+                            $errors = $error;
+                        }
+                        $request->session()->flash("error",$errors[count($errors)-1]);
+                        return redirect()->route('user.config');
+
+                    }else{
+                        return redirect()->back();
+                    }
+                }
+            }else{
+                return redirect()->back();
+            }
+        }catch(Exception $ex){
+
+        }
+    }
+
     public function forgot () {
  
         return view('forgot');

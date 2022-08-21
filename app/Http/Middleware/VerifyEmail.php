@@ -35,9 +35,10 @@ class VerifyEmail
         }
 
         //verifying if email is verified
-
-        if($user['user_email_verified']){
-            return redirect()->route("home");
+        if(isset($user['user_email_verified'])){
+            if($user['user_email_verified']){
+                return redirect()->route("home");
+            }
         }
 
         
