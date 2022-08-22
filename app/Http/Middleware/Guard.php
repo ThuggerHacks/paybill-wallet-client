@@ -31,6 +31,7 @@ class Guard
 
         //if any error occurs with the token
         if(isset($user['error'])){
+            $request->session()->forget('user_token');
             return redirect()->route('login');
         }
 

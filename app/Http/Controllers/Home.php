@@ -7,6 +7,26 @@ use Illuminate\Support\Facades\Http;
 
 class Home extends Controller
 {
+
+
+    public function checkErrors($obj){
+         //checking for errors
+         if(isset($obj['errors'])){
+
+            $errors = [];
+
+            foreach($obj['errors'] as $error){
+                $errors = $error;
+            }
+
+            return  $errors[0];
+        }else if(isset($obj['error'])){
+            return $obj['error'];
+        }else if(isset($obj['success'])){
+            return  $obj['success'];
+        }
+    }
+
     public  function index(Request $request) {
         
         try{
@@ -38,23 +58,90 @@ class Home extends Controller
         }
     }
 
-    public function deposits() {
-        return view('deposits');
+    public function deposits(Request $request,  $wallet_id = 0, $page = 1) {
+
+        if($wallet_id == 0 ){
+            return redirect()->back();
+        }
+
+        try{
+
+            $deposits = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/deposit/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            
+
+            return view('deposits',["data" => $deposits]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
     }
 
-    public function withdraws() {
-        return view('withdraw');
+    public function withdraws(Request $request,  $wallet_id = 0, $page = 1) {
+        if($wallet_id == 0 ){
+            return redirect()->back();
+        }
+
+        try{
+
+            $withdraw = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/withdraw/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            
+
+            return view('withdraw',["data" => $withdraw]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+
     }
 
     public function payments() {
         return view('payment');
     }
 
-    public function sends() {
-        return view('send');
+    public function sends(Request $request,  $wallet_id = 0, $page = 1) {
+
+        if($wallet_id == 0 ){
+            return redirect()->back();
+        }
+
+        try{
+
+            $transfers = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/transfer/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            
+
+            return view('send',["data" => $transfers]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+
     }
 
-    public function received() {
+    public function received(Request $request,  $wallet_id = 0, $page = 1) {
+
+        if($wallet_id == 0 ){
+            return redirect()->back();
+        }
+
+        try{
+
+            $transfers = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/transfer/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            
+
+            return view('received',["data" => $transfers]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+
         return view('received');
     }
 

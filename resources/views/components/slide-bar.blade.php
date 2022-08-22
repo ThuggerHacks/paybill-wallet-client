@@ -6,11 +6,13 @@
                 <!-- profile box -->
                 <div class="profileBox pt-2 pb-1">
                     <div class="in">
+                        @php($wallet_id = 0)
                         @if(isset($wallets))
                             @foreach ($wallets as $wallet)
                                 @if($wallet['wallet_activated_status'])
                                     <strong>{{ $wallet['wallet_title'] }}</strong>
                                     <div class="text-muted">{{ $wallet['wallet_id'] }}</div>
+                                    @php($wallet_id = $wallet['wallet_id'])
                                 @endif
                             @endforeach
                         @endif
@@ -45,7 +47,7 @@
 
                 <!-- action group -->
                 <div class="action-group">
-                    <a href="{{ route("deposits") }}" class="action-button">
+                    <a href="{{ route("deposits",urlencode(base64_encode($wallet_id))) }}" class="action-button">
                         <div class="in">
                             <div class="iconbox">
                                 <ion-icon name="add-outline"></ion-icon>
@@ -53,7 +55,7 @@
                             Depósitos
                         </div>
                     </a>
-                    <a href="{{ route("withdraw") }}" class="action-button">
+                    <a href="{{ route("withdraw",urlencode(base64_encode($wallet_id))) }}" class="action-button">
                         <div class="in">
                             <div class="iconbox">
                                 <ion-icon name="arrow-down-outline"></ion-icon>
@@ -61,7 +63,7 @@
                             Retiradas
                         </div>
                     </a>
-                    <a href="{{ route("sends") }}" class="action-button">
+                    <a href="{{ route("sends",urlencode(base64_encode($wallet_id))) }}" class="action-button">
                         <div class="in">
                             <div class="iconbox">
                                 <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -69,7 +71,7 @@
                             Envios
                         </div>
                     </a>
-                    <a href="{{ route("received")}}" class="action-button">
+                    <a href="{{ route("received",urlencode(base64_encode($wallet_id)))}}" class="action-button">
                         <div class="in">
                             <div class="iconbox">
                                 <ion-icon name="card-outline"></ion-icon>
