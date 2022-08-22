@@ -18,7 +18,7 @@ Route::get('/sends/{wallet_id?}/{page?}', [Home::class,"sends"])->middleware('gu
 
 Route::get('/received/{wallet_id?}/{page?}', [Home::class ,"received"])->middleware('guard')->name("received");
 
-Route::get('/transation/{id?}', [Home::class, "transation"])->middleware('guard')->name("transation.details");
+//Route::get('/transation/{type?}/{id?}', [Home::class, "transation"])->middleware('guard')->name("transation.details");
 
 Route::post("/wallet",[Home::class, "createWallet"])->middleware('guard')->name("wallet.create");
 

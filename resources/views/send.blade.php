@@ -13,22 +13,24 @@
         {{-- <div class="section-title">Today</div> --}}
         <div class="transactions">
            @foreach ($data['transfers']['data'] as $transfers)
-               <!-- item -->
-                <a href="{{ route("transation.details") }}" class="item">
-                    <div class="detail">
-                        <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
-                        <div>
-                            <strong>{{ $data['wallet']['wallet_title'] }}</strong>
-                            <p>para: {{ $transfers['sent_to_wallet_id'] }}</p>
-                            <p>ref:{{ $transfers['sent_reference']}}</p>
-                            <p>data: {{ $transfers['sent_at']}}</p>
+                @if($transfers['sent_from_wallet_id'] == $data['wallet']['wallet_id'] )
+                <!-- item -->
+                    <a href="#" class="item">
+                        <div class="detail">
+                            <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
+                            <div>
+                                <strong>{{ $data['wallet']['wallet_title'] }}</strong>
+                                <p>para: {{ $transfers['sent_to_wallet_id'] }}</p>
+                                <p>ref:{{ $transfers['sent_reference']}}</p>
+                                <p>data: {{ $transfers['sent_at']}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="right">
-                        <div class="price text-danger"> -  {{  number_format($transfers['sent_amount'],2) }} mzn</div>
-                    </div>
-                </a>
-            <!-- * item -->
+                        <div class="right">
+                            <div class="price text-danger"> -  {{  number_format($transfers['sent_amount'],2) }} mzn</div>
+                        </div>
+                    </a>
+                <!-- * item -->
+                @endif
            @endforeach
         </div>
     </div>

@@ -14,7 +14,7 @@
         <div class="transactions">
            @foreach ($data['withdraws']['data'] as $withdraw)
                <!-- item -->
-                <a href="{{ route("transation.details") }}" class="item">
+                <a href="#" class="item">
                     <div class="detail">
                         <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
                         <div>

@@ -37,7 +37,9 @@
                     <ion-icon name="arrow-forward-outline"></ion-icon>
                 </div>
             </div>
-            <h3 class="text-center mt-2">Pagamento enviado</h3>
+            @if($type == 'deposit')
+                <h3 class="text-center mt-2">Depositado</h3>
+            @endif
         </div>
 
         <ul class="listview flush transparent simple-listview no-space mt-3">
@@ -47,27 +49,27 @@
             </li>
             <li>
                 <strong>Para</strong>
-                <span>Jordi Santiago</span>
+                <span>{{ $data['deposit_to_wallet_id'] }}</span>
             </li>
             <li>
                 <strong>Nome do banco</strong>
                 <span>Envato Bank</span>
             </li>
             <li>
-                <strong>Categoria de transação</strong>
-                <span>Shopping</span>
+                <strong>Referencia</strong>
+                <span>{{ $data['deposit_reference'] }}</span>
             </li>
-            <li>
+            {{-- <li>
                 <strong>Recibo</strong>
                 <span>Yes</span>
-            </li>
+            </li> --}}
             <li>
                 <strong>Data e Hora</strong>
-                <span>Sep 25, 2020 10:45 AM</span>
+                <span>{{ $data['deposited_at'] }}</span>
             </li>
             <li>
                 <strong>Valor</strong>
-                <h3 class="m-0">$ 24</h3>
+                <h3 class="m-0">{{ number_format($data['deposit_amount'],2) }}mzn</h3>
             </li>
         </ul>
 

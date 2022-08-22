@@ -142,10 +142,36 @@ class Home extends Controller
             return redirect()->back();
         }
 
-        return view('received');
     }
 
-    public function transation($id=0) {
+    public function transation(Request $request,$type = "", $id=0) {
+
+        if($type == "" || $id == 0 ){
+
+            return redirect()->back();
+        }
+
+        if($type !="deposit" && $type!="withdraw" && $type!="transfer"){
+            return redirect()->back();
+        }
+
+        try{
+
+            $transations = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/'.$type.'/'.base64_decode($id));
+
+            if(!$transations){
+                return redirect()->back();
+            }
+        
+
+            return view('transation',["data" => $transations,"type" => $type]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+
         return view('transation');
     }
 
