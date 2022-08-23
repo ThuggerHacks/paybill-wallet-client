@@ -183,8 +183,14 @@ class Home extends Controller
             return redirect()->route("home");
         }
 
-        if($type !="deposit" && $type!="withdraw" && $type!="transfer"){
+        if($type !="deposit" && $type!="withdraw" && $type!="transfer" && $type!="received"){
             return redirect()->route("home");
+        }
+        
+        $old_type = "";
+        if($type == "received"){
+            $old_type = $type;
+            $type = "transfer";
         }
 
         try{
@@ -194,7 +200,6 @@ class Home extends Controller
                 'access_token' => $request->session()->get('user_token')
             ])->get(config("constants.paybill_api").'/'.$type.'/'.urlencode(base64_decode($id)));
             
-
              //dealing with errors
              if(isset($transations['message'])){
                 return redirect()->route("home");
@@ -202,6 +207,10 @@ class Home extends Controller
 
             if(isset($transations['error'])){
                 return redirect()->route("home");
+            }
+
+            if($old_type == "received"){
+                $type = $old_type;
             }
 
 

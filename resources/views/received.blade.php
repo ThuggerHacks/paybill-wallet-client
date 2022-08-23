@@ -4,7 +4,7 @@
 
 @section("content")
 
-@include("_partials.header",["title" => "Recebidos"])
+@include("_partials.header",["title" => "Recebido"])
 
 <!-- App Capsule -->
 <div id="appCapsule">
@@ -13,23 +13,21 @@
         {{-- <div class="section-title">Today</div> --}}
         <div class="transactions">
            @foreach ($data['transfers']['data'] as $transfers)
-              @if($transfers['sent_to_wallet_id'] == $data['wallet']['wallet_id'] )
-                     <!-- item -->
-                    <a href="{{ route("transation.details") }}" class="item">
+                @if($transfers['sent_to_wallet_id'] == $data['wallet']['wallet_id'] )
+                <!-- item -->
+                    <a href="{{ route("transation.details",["type" => "received", "id" => urlencode(base64_encode($transfers['sent_reference']))]) }}" class="item">
                         <div class="detail">
                             <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
                             <div>
                                 <strong>{{ $data['wallet']['wallet_title'] }}</strong>
-                                <p>De: {{ $transfers['sent_from_wallet_id'] }}</p>
-                                <p>ref:{{ $transfers['sent_reference']}}</p>
-                                <p>data: {{ $transfers['sent_at']}}</p>
+                                <p>Clique para mais informa&ccedil;&atilde;o</p>
                             </div>
                         </div>
                         <div class="right">
                             <div class="price text-success"> +  {{  number_format($transfers['sent_amount'],2) }} mzn</div>
                         </div>
                     </a>
-                    <!-- * item -->
+                <!-- * item -->
                 @endif
            @endforeach
         </div>

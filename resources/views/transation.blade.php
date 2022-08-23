@@ -43,6 +43,8 @@
                 <h3 class="text-center mt-2">Levantado</h3>
             @elseif ($type == "transfer")
                 <h3 class="text-center mt-2">Transferido</h3>
+            @elseif ($type == "received")
+                <h3 class="text-center mt-2">Recebido</h3>
             @endif
         </div>
 
@@ -60,6 +62,8 @@
                         {{$data['wallet']['wallet_title']}} ( {{$data['wallet']['wallet_id']}} )
                     @elseif ($type == "transfer")
                         {{$data['wallet']['wallet_title']}} ( {{$data['wallet']['wallet_id']}} )
+                    @elseif($type == "received")
+                        {{$data['transfer']['sent_from_wallet_id']}} 
                     @endif
                 </span>
             </li>
@@ -71,7 +75,9 @@
                     @elseif ($type == "withdraw")
                         {{$data['wallet']['wallet_associated_phone_number']}}
                     @elseif ($type == "transfer")
-                        {{$data['transfer']['sent_to_wallet_id']}} 
+                        {{$data['transfer']['sent_to_wallet_id']}}
+                    @elseif ($type == "received")
+                        Sua carteira ({{$data['transfer']['sent_to_wallet_id']}})  
                     @endif
                 </span>
             </li>
@@ -86,7 +92,7 @@
                         {{$data['deposit']['deposit_reference']}}
                     @elseif ($type == "withdraw")
                         {{$data['withdraw']['withdraw_reference']}}
-                    @elseif ($type == "transfer")
+                    @elseif ($type == "transfer" || $type == "received")
                         {{$data['transfer']['sent_reference']}}
                     @endif
                 </span>
@@ -99,7 +105,7 @@
                         {{$data['deposit']['deposited_at']}}
                     @elseif ($type == "withdraw")
                         {{$data['withdraw']['withdraw_at']}}
-                    @elseif ($type == "transfer")
+                    @elseif ($type == "transfer" || $type == "received")
                         {{$data['transfer']['sent_at']}}
                     @endif
                 </span>
@@ -111,7 +117,7 @@
                         {{ number_format($data['deposit']['deposit_amount'],2) }}
                     @elseif ($type == "withdraw")
                         {{ number_format($data['withdraw']['withdraw_amount'],2) }}
-                    @elseif ($type == "transfer")
+                    @elseif ($type == "transfer" || $type == "received")
                         {{ number_format($data['transfer']['sent_amount'],2) }}
                     @endif
                     mzn
