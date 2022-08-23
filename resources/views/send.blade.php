@@ -15,14 +15,12 @@
            @foreach ($data['transfers']['data'] as $transfers)
                 @if($transfers['sent_from_wallet_id'] == $data['wallet']['wallet_id'] )
                 <!-- item -->
-                    <a href="#" class="item">
+                    <a href="{{ route("transation.details",["type" => "transfer", "id" => urlencode(base64_encode($transfers['sent_reference']))]) }}" class="item">
                         <div class="detail">
                             <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
                             <div>
                                 <strong>{{ $data['wallet']['wallet_title'] }}</strong>
-                                <p>para: {{ $transfers['sent_to_wallet_id'] }}</p>
-                                <p>ref:{{ $transfers['sent_reference']}}</p>
-                                <p>data: {{ $transfers['sent_at']}}</p>
+                                <p>Clique para mais informa&ccedil;&atilde;o</p>
                             </div>
                         </div>
                         <div class="right">

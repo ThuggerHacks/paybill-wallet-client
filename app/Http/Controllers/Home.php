@@ -8,25 +8,6 @@ use Illuminate\Support\Facades\Http;
 class Home extends Controller
 {
 
-
-    public function checkErrors($obj){
-         //checking for errors
-         if(isset($obj['errors'])){
-
-            $errors = [];
-
-            foreach($obj['errors'] as $error){
-                $errors = $error;
-            }
-
-            return  $errors[0];
-        }else if(isset($obj['error'])){
-            return $obj['error'];
-        }else if(isset($obj['success'])){
-            return  $obj['success'];
-        }
-    }
-
     public  function index(Request $request) {
         
         try{
@@ -69,8 +50,22 @@ class Home extends Controller
             $deposits = Http::withHeaders([
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
-            ])->get(config("constants.paybill_api").'/deposit/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            ])->get(config("constants.paybill_api").'/deposit/wallet/'.urlencode(base64_decode($wallet_id)).'/?page='.$page);
             
+            
+            //dealing with errors
+            if(isset($deposits['message'])){
+                return redirect()->route("home");
+            }
+
+            if(isset($deposits['error'])){
+                return redirect()->route("home");
+            }
+
+            if(count($deposits['deposits']['data']) == 0 ) {
+                return redirect()->route("home");
+            }
+
 
             return view('deposits',["data" => $deposits]);
         }catch(Exception $ex){
@@ -88,8 +83,21 @@ class Home extends Controller
             $withdraw = Http::withHeaders([
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
-            ])->get(config("constants.paybill_api").'/withdraw/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            ])->get(config("constants.paybill_api").'/withdraw/wallet/'.urlencode(base64_decode($wallet_id)).'/?page='.$page);
             
+             //dealing with errors
+            if(isset($withdraw['message'])){
+                return redirect()->route("home");
+            }
+
+            if(isset($withdraw['error'])){
+                return redirect()->route("home");
+            }
+
+            if(count($withdraw['withdraws']['data']) == 0 ) {
+                return redirect()->route("home");
+            }
+
 
             return view('withdraw',["data" => $withdraw]);
         }catch(Exception $ex){
@@ -113,8 +121,20 @@ class Home extends Controller
             $transfers = Http::withHeaders([
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
-            ])->get(config("constants.paybill_api").'/transfer/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            ])->get(config("constants.paybill_api").'/transfer/wallet/'.urlencode(base64_decode($wallet_id)).'/?page='.$page);
             
+              //dealing with errors
+            if(isset($transfers['message'])){
+                return redirect()->route("home");
+            }
+
+            if(isset($transfers['error'])){
+                return redirect()->route("home");
+            }
+
+            if(count($transfers['transfers']['data']) == 0 ) {
+                return redirect()->route("home");
+            }
 
             return view('send',["data" => $transfers]);
         }catch(Exception $ex){
@@ -134,8 +154,20 @@ class Home extends Controller
             $transfers = Http::withHeaders([
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
-            ])->get(config("constants.paybill_api").'/transfer/wallet/'.base64_decode($wallet_id).'/?page='.$page);
+            ])->get(config("constants.paybill_api").'/transfer/wallet/'.urlencode(base64_decode($wallet_id)).'/?page='.$page);
             
+              //dealing with errors
+            if(isset($transfers['message'])){
+                return redirect()->route("home");
+            }
+
+            if(isset($transfers['error'])){
+                return redirect()->route("home");
+            }
+
+            if(count($transfers['transfers']['data']) == 0 ) {
+                return redirect()->route("home");
+            }
 
             return view('received',["data" => $transfers]);
         }catch(Exception $ex){
@@ -144,15 +176,15 @@ class Home extends Controller
 
     }
 
-    public function transation(Request $request,$type = "", $id=0) {
+    public function transation(Request $request,$type = "deposit", $id = 0) {
 
         if($type == "" || $id == 0 ){
 
-            return redirect()->back();
+            return redirect()->route("home");
         }
 
         if($type !="deposit" && $type!="withdraw" && $type!="transfer"){
-            return redirect()->back();
+            return redirect()->route("home");
         }
 
         try{
@@ -160,12 +192,18 @@ class Home extends Controller
             $transations = Http::withHeaders([
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
-            ])->get(config("constants.paybill_api").'/'.$type.'/'.base64_decode($id));
+            ])->get(config("constants.paybill_api").'/'.$type.'/'.urlencode(base64_decode($id)));
+            
 
-            if(!$transations){
-                return redirect()->back();
+             //dealing with errors
+             if(isset($transations['message'])){
+                return redirect()->route("home");
             }
-        
+
+            if(isset($transations['error'])){
+                return redirect()->route("home");
+            }
+
 
             return view('transation',["data" => $transations,"type" => $type]);
         }catch(Exception $ex){

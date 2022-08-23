@@ -14,13 +14,12 @@
         <div class="transactions">
            @foreach ($data['withdraws']['data'] as $withdraw)
                <!-- item -->
-                <a href="#" class="item">
+                <a href="{{ route("transation.details",["type" => "withdraw", "id" => urlencode(base64_encode($withdraw['withdraw_reference']))]) }}" class="item">
                     <div class="detail">
                         <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
                         <div>
                             <strong>{{ $data['wallet']['wallet_title'] }}</strong>
-                            <p>ref:{{ $withdraw['withdraw_reference']}}</p>
-                            <p>data: {{ $withdraw['withdraw_at']}}</p>
+                            <p>Clique para mais informa&ccedil;&atilde;o</p>
                         </div>
                     </div>
                     <div class="right">

@@ -14,13 +14,12 @@
         <div class="transactions">
            @foreach ($data['deposits']['data'] as $deposit)
                <!-- item -->
-                <a href="#" class="item">
+                <a href="{{ route("transation.details",["type" => "deposit", "id" => urlencode(base64_encode($deposit['deposit_reference']))]) }}" class="item">
                     <div class="detail">
                         <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
                         <div>
                             <strong>{{ $data['wallet']['wallet_title'] }}</strong>
-                            <p>ref:{{ $deposit['deposit_reference']}}</p>
-                            <p>data: {{ $deposit['deposited_at']}}</p>
+                            <p>Clique para mais informa&ccedil;&atilde;o</p>
                         </div>
                     </div>
                     <div class="right">

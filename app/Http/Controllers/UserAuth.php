@@ -29,9 +29,11 @@ class UserAuth extends Controller
             if(isset($resp['token'])){
                 $request->session()->put("user_token",$resp['token']);
                 return redirect()->route("home");
-            }else{
+            }else if(isset($resp['error'])){
                 //if error, send error to view
                 return redirect()->back()->with("error", $resp['error']);
+            }else{
+                return redirect()->back()->with("error","Houve algum erro, por favor volte a tentar");;
             }
         }catch(Exception $ex){
             return redirect()->back()->with("error","Houve algum erro, por favor volte a tentar");

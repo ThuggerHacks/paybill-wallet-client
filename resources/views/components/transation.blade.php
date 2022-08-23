@@ -6,7 +6,7 @@
     </div>
     <div class="transactions">
         <!-- item -->
-        <a href="{{ route("transation.details")}}" class="item">
+        <a href="#" class="item">
             <div class="detail">
                 <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
                 <div>
@@ -20,7 +20,7 @@
         </a>
         <!-- * item -->
         <!-- item -->
-        <a href="{{ route("transation.details")}}" class="item">
+        <a href="#" class="item">
             <div class="detail">
                 <img src="assets/img/sample/brand/2.jpg" alt="img" class="image-block imaged w48">
                 <div>
@@ -34,7 +34,7 @@
         </a>
         <!-- * item -->
         <!-- item -->
-        <a href="{{ route("transation.details")}}" class="item">
+        <a href="#" class="item">
             <div class="detail">
                 <img src="assets/img/sample/avatar/avatar3.jpg" alt="img" class="image-block imaged w48">
                 <div>
@@ -48,7 +48,7 @@
         </a>
         <!-- * item -->
         <!-- item -->
-        <a href="{{ route("transation.details")}}" class="item">
+        <a href="#" class="item">
             <div class="detail">
                 <img src="assets/img/sample/avatar/avatar4.jpg" alt="img" class="image-block imaged w48">
                 <div>
