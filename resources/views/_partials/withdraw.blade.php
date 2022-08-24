@@ -40,7 +40,7 @@
                             <label class="label">Valor</label>
                             <div class="input-group mb-2">
                                 <span class="input-group-text" id="basic-addonb1">$</span>
-                                <input type="text" class="form-control" placeholder="Insira um valor"
+                                <input type="number" class="form-control" placeholder="Insira um valor"
                                     name="amount">
                             </div>
                         </div>

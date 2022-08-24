@@ -1,6 +1,6 @@
 @extends("layouts.layout")
 
-@section("title","Depositos")
+@section("title","Transferencias")
 
 @section("content")
 
