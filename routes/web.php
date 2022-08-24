@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuth;
 
-Route::get('/login', [UserAuth::class,"login"])->middleware("login.guard")->name("login");
+Route::get('/login/{wallet_id?}', [UserAuth::class,"login"])->middleware("login.guard")->name("login");
 
 Route::post("/login", [UserAuth::class, "makeLogin"])->middleware("login.guard")->name("login.make");
 

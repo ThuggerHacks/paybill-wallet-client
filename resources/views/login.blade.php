@@ -64,7 +64,5 @@
 </div>
 <!-- * App Capsule -->
 
-
-
-
 @endsection
+

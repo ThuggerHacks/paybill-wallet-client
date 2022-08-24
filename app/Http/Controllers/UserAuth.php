@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserAuth extends Controller
 {
-    public function login () {
+    public function login ($wallet_id = 0) {
 
         return view('login');
     }
