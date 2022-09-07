@@ -62,9 +62,9 @@ class Home extends Controller
                 return redirect()->route("home");
             }
 
-            if(count($deposits['deposits']['data']) == 0 ) {
-                return redirect()->route("home");
-            }
+            // if(count($deposits['deposits']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
 
 
             return view('deposits',["data" => $deposits]);
@@ -94,9 +94,9 @@ class Home extends Controller
                 return redirect()->route("home");
             }
 
-            if(count($withdraw['withdraws']['data']) == 0 ) {
-                return redirect()->route("home");
-            }
+            // if(count($withdraw['withdraws']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
 
 
             return view('withdraw',["data" => $withdraw]);
@@ -106,8 +106,36 @@ class Home extends Controller
 
     }
 
-    public function payments() {
-        return view('payment');
+    public function payments(Request $request, $wallet_id = 0, $page = 1) {
+
+        if($wallet_id == 0 ){
+            return redirect()->back();
+        }
+
+        try{
+
+            $payments = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/payments/wallet/'.urlencode(base64_decode($wallet_id)).'/?page='.$page);
+            
+             //dealing with errors
+            if(isset($payments['message'])){
+                return redirect()->route("home");
+            }
+
+            if(isset($payments['error'])){
+                return redirect()->route("home");
+            }
+
+            // if(count($payments['payments']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
+
+            return view('payment',["data" => $payments,"wallet_id" => base64_decode($wallet_id)]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
     }
 
     public function sends(Request $request,  $wallet_id = 0, $page = 1) {
@@ -132,9 +160,9 @@ class Home extends Controller
                 return redirect()->route("home");
             }
 
-            if(count($transfers['transfers']['data']) == 0 ) {
-                return redirect()->route("home");
-            }
+            // if(count($transfers['transfers']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
 
             return view('send',["data" => $transfers]);
         }catch(Exception $ex){
@@ -165,9 +193,9 @@ class Home extends Controller
                 return redirect()->route("home");
             }
 
-            if(count($transfers['transfers']['data']) == 0 ) {
-                return redirect()->route("home");
-            }
+            // if(count($transfers['transfers']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
 
             return view('received',["data" => $transfers]);
         }catch(Exception $ex){
@@ -178,12 +206,12 @@ class Home extends Controller
 
     public function transation(Request $request,$type = "deposit", $id = 0) {
 
-        if($type == "" || $id == 0 ){
+        if($type == "" || $id == 0){
 
             return redirect()->route("home");
         }
 
-        if($type !="deposit" && $type!="withdraw" && $type!="transfer" && $type!="received"){
+        if($type !="deposit" && $type!="withdraw" && $type!="transfer" && $type!="received" && $type!="payment"){
             return redirect()->route("home");
         }
         
@@ -212,7 +240,6 @@ class Home extends Controller
             if($old_type == "received"){
                 $type = $old_type;
             }
-
 
             return view('transation',["data" => $transations,"type" => $type]);
         }catch(Exception $ex){
@@ -468,4 +495,5 @@ class Home extends Controller
             return redirect()->back();
         }
     }
+
 }

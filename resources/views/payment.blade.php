@@ -10,108 +10,49 @@
 <div id="appCapsule">
      <!-- Transactions -->
      <div class="section mt-2">
-        <div class="section-title">Today</div>
+        {{-- <div class="section-title">Today</div> --}}
         <div class="transactions">
-            <!-- item -->
-            <a href="#" class="item">
-                <div class="detail">
-                    <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
-                    <div>
-                        <strong>Amazon</strong>
-                        <p>Shopping</p>
+           @foreach ($data['payments']['data'] as $payments)
+           
+               <!-- item -->
+                <a href="{{ route("transation.details",["type" => "payment", "id" => urlencode(base64_encode($payments['payment_reference']))]) }}" class="item">
+                    <div class="detail">
+                        <img src="{{ asset("assets/img/sample/brand/1.jpg")}}" alt="img" class="image-block imaged w48">
+                        <div>
+                            <strong>{{ $data['wallet']['wallet_title']  }}</strong>
+                            <p>Clique para mais informa&ccedil;&atilde;o</p>
+                        </div>
                     </div>
-                </div>
-                <div class="right">
-                    <div class="price text-danger"> - $ 150</div>
-                </div>
-            </a>
-            <!-- * item -->
-            <!-- item -->
-            <a href="#" class="item">
-                <div class="detail">
-                    <img src="assets/img/sample/brand/2.jpg" alt="img" class="image-block imaged w48">
-                    <div>
-                        <strong>Apple</strong>
-                        <p>Appstore Purchase</p>
+                    <div class="right">
+                        @if($payments['payer_wallet_id'] == $wallet_id)
+                            <div class="price text-danger"> - {{  number_format($payments['payment_amount'],2) }} mzn</div>
+                        @else
+                            <div class="price text-success"> + {{  number_format($payments['payment_amount'],2) }} mzn</div>
+                        @endif
                     </div>
-                </div>
-                <div class="right">
-                    <div class="price text-danger">- $ 29</div>
-                </div>
-            </a>
+                </a>
             <!-- * item -->
-            <!-- item -->
-            <a href="#" class="item">
-                <div class="detail">
-                    <img src="assets/img/sample/avatar/avatar3.jpg" alt="img" class="image-block imaged w48">
-                    <div>
-                        <strong>Alex Ljung</strong>
-                        <p>Transfer</p>
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="price">+ $ 1,000</div>
-                </div>
-            </a>
-            <!-- * item -->
-            <!-- item -->
-            <a href="#" class="item">
-                <div class="detail">
-                    <img src="assets/img/sample/avatar/avatar4.jpg" alt="img" class="image-block imaged w48">
-                    <div>
-                        <strong>Beatriz Brito</strong>
-                        <p>Transfer</p>
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="price text-danger">- $ 186</div>
-                </div>
-            </a>
-            <!-- * item -->
-        </div>
-    </div>
-    <!-- * Transactions -->
-
-    <!-- Transactions -->
-    <div class="section mt-2">
-        <div class="section-title">Yesterday</div>
-        <div class="transactions">
-            <!-- item -->
-            <a href="#" class="item">
-                <div class="detail">
-                    <img src="assets/img/sample/brand/1.jpg" alt="img" class="image-block imaged w48">
-                    <div>
-                        <strong>Amazon</strong>
-                        <p>Shopping</p>
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="price text-danger"> - $ 150</div>
-                </div>
-            </a>
-            <!-- * item -->
-            <!-- item -->
-            <a href="#" class="item">
-                <div class="detail">
-                    <img src="assets/img/sample/brand/2.jpg" alt="img" class="image-block imaged w48">
-                    <div>
-                        <strong>Apple</strong>
-                        <p>Appstore Purchase</p>
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="price text-danger">- $ 29</div>
-                </div>
-            </a>
-            <!-- * item -->
+           @endforeach
         </div>
     </div>
     <!-- * Transactions -->
 
     
-    <div class="section mt-2 mb-2">
-        <a href="#" class="btn btn-primary btn-block btn-lg">Carregar mais</a>
+    <div class="row" style="display: flex;justify-content:center;flex-wrap:wrap">
+
+        @if($data['payments']['prev_page_url'])
+            <div class="section mt-2 mb-2 col-md-2">
+                <a href="{{ route("payments",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['payments']['current_page'] - 1)] )}}" class="btn btn-primary btn-block btn-lg">Anterior</a>
+            </div>
+        @endif
+
+        @if($data['payments']['next_page_url'])
+            <div class="section mt-2 mb-2 col-md-2">
+                <a href="{{ route("payments",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['payments']['current_page'] + 1)] )}}" class="btn btn-primary btn-block btn-lg">Proximo</a>
+            </div>
+        @endif
     </div>
+    
 </div>
 
 <x-bottom-tab :user="false" :config="false" ></x-bottom-tab>

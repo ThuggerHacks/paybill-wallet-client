@@ -97,7 +97,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route("payments") }}" class="item">
+                        <a href="{{ route("payments",urlencode(base64_encode($wallet_id))) }}" class="item">
                             <div class="icon-box bg-primary">
                                 <ion-icon name="card-outline"></ion-icon>
                             </div>

@@ -45,6 +45,8 @@
                 <h3 class="text-center mt-2">Transferido</h3>
             @elseif ($type == "received")
                 <h3 class="text-center mt-2">Recebido</h3>
+            @elseif($type == "payment")
+                <h3 class="text-center mt-2">Pago</h3>
             @endif
         </div>
 
@@ -64,6 +66,8 @@
                         {{$data['wallet']['wallet_title']}} ( {{$data['wallet']['wallet_id']}} )
                     @elseif($type == "received")
                         {{$data['transfer']['sent_from_wallet_id']}} 
+                    @elseif($type == "payment")
+                        {{$data['payments']['payer_wallet_id']}} 
                     @endif
                 </span>
             </li>
@@ -77,7 +81,9 @@
                     @elseif ($type == "transfer")
                         {{$data['transfer']['sent_to_wallet_id']}}
                     @elseif ($type == "received")
-                        Sua carteira ({{$data['transfer']['sent_to_wallet_id']}})  
+                        {{$data['transfer']['sent_to_wallet_id']}} 
+                    @elseif($type == "payment")
+                        {{$data['payments']['wallet_id']}} 
                     @endif
                 </span>
             </li>
@@ -94,6 +100,8 @@
                         {{$data['withdraw']['withdraw_reference']}}
                     @elseif ($type == "transfer" || $type == "received")
                         {{$data['transfer']['sent_reference']}}
+                    @elseif($type == "payment")
+                        {{$data['payments']['payment_reference']}}
                     @endif
                 </span>
             </li>
@@ -107,6 +115,8 @@
                         {{$data['withdraw']['withdraw_at']}}
                     @elseif ($type == "transfer" || $type == "received")
                         {{$data['transfer']['sent_at']}}
+                    @elseif($type == "payment")
+                        {{$data['payments']['payment_reference']}}
                     @endif
                 </span>
             </li>
@@ -119,6 +129,8 @@
                         {{ number_format($data['withdraw']['withdraw_amount'],2) }}
                     @elseif ($type == "transfer" || $type == "received")
                         {{ number_format($data['transfer']['sent_amount'],2) }}
+                    @elseif($type == "payment")
+                        {{ number_format($data['payments']['payment_amount'],2) }}
                     @endif
                     mzn
                 </h3>

@@ -12,7 +12,7 @@ Route::get('/deposits/{wallet_id?}/{page?}', [Home::class,"deposits"])->middlewa
 
 Route::get('/withdraws/{wallet_id?}/{page?}', [Home::class,"withdraws"])->middleware('guard')->name("withdraw");
 
-Route::get('/payments', [Home::class, "payments"])->middleware('guard')->name("payments");
+Route::get('/payments/{wallet_id?}/{page?}', [Home::class, "payments"])->middleware('guard')->name("payments");
 
 Route::get('/sends/{wallet_id?}/{page?}', [Home::class,"sends"])->middleware('guard')->name("sends");
 
