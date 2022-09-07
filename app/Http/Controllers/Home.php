@@ -16,9 +16,23 @@ class Home extends Controller
                 'Accept' => 'application/json',
                 'access_token' => $request->session()->get('user_token')
             ])->get(config("constants.paybill_api").'/wallet/user');
-            
 
-            return view('home',["wallets" => $my_wallets['data']]);
+            //getting activated wallet
+                $active_wallet = 0;
+                foreach($my_wallets['data'] as $active){
+                    if($active['wallet_activated_status']){
+                        $active_wallet = $active;
+                        break;
+                    }
+                }
+
+
+            $payments = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/payments/wallet/'.urlencode($active_wallet['wallet_id']).'/?page=1');
+
+            return view('home',["wallets" => $my_wallets['data'],"data" => $payments, "wallet_id" => $active_wallet['wallet_id']]);
 
         }catch( Exception $ex){
             return redirect()->back();

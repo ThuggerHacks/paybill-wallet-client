@@ -11,9 +11,13 @@ class transation extends Component
      *
      * @return void
      */
-    public function __construct()
+
+     public $data = [];
+     public $walletId = 0;
+    public function __construct($data,$wallet_id)
     {
-        //
+        $this->data = $data;
+        $this->wallet_id = $wallet_id;
     }
 
     /**

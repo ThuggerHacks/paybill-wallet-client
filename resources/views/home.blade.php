@@ -115,7 +115,7 @@
    
     <!-- * Stats -->
     <x-modal-info ></x-modal-info>
-    <x-transation></x-transation>
+    <x-transation :data="$data" :walletId="$wallet_id"></x-transation>
     <x-footer></x-footer>
     <x-bottom-tab :user="true" :config="false" ></x-bottom-tab>
     <x-slide-bar :wallets="$wallets"></x-slide-bar>
