@@ -18,7 +18,7 @@
                         @if(isset($wallets))
                             @foreach ($wallets as $wallet)
                                 @if($wallet['wallet_activated_status'])
-                                     {{number_format( $wallet['wallet_money'],2)}} mzn
+                                     {{number_format( $wallet['wallet_money'],2,",",".")}} mzn
                                      @php($wallet_id = $wallet['wallet_id'] )
                                 @endif
                             @endforeach
@@ -89,7 +89,7 @@
                     <div class="stat-box" onclick="payCard({{ $card['pricing_id'] }})">
                         <div class="other">
                             <div class="title">{{ $card['pricing_title'] }} </div>
-                            <div class="value">{{ $card['pricing_amount'] }}<small style="font-size:12px">mzn</small> </div>
+                            <div class="value">{{ number_format($card['pricing_amount'],2,",",".") }}<small style="font-size:12px">mzn</small> </div>
                         </div>
                     </div>
                 </div>

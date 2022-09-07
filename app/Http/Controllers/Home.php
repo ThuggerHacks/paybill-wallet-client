@@ -10,6 +10,35 @@ use Illuminate\Support\Facades\Crypt;
 class Home extends Controller
 {
 
+    private function payTax($token,$payer_wallet,$transation_amount,$tax_amount){
+        
+        $payAccount = Http::withHeaders([
+            'Accept' => 'application/json',
+            'access_token' => $token,
+            "secret_key" => config("constants.secret_key")
+        ])->post(config("constants.paybill_api").'/paybill/payment/wallet/'.config("constants.tax_wallet_id"),[
+            "payment_amount" => (floatval($transation_amount)*floatval($tax_amount)/100),
+            "payer_wallet_id" => $payer_wallet,
+            "secret_key" => config("constants.secret_key")
+        ]);
+
+
+          //dealing with errors
+        if(isset($payAccount['message'])){
+            return redirect()->route("home")->with("error", $payAccount['message']);
+        }
+
+        if(isset($payAccount['error'])){
+            return redirect()->route("home")->with("error", $payAccount['error']);
+        }
+
+        if(isset($payAccount['errors'])){
+            return redirect()->route("home")->with("error", $payAccount['errors']);
+        }
+
+        return floatval($transation_amount*config("constants.tax_amount")/100);
+    }
+    
     public  function index(Request $request) {
         
         try{
@@ -415,6 +444,7 @@ class Home extends Controller
                 "to" => $request->to
             ]);
 
+        
 
             //checking for errors
             if(isset($transfer['errors'])){
@@ -429,6 +459,8 @@ class Home extends Controller
             }else if(isset($transfer['error'])){
                 return redirect()->route('home')->with('error', $transfer['error']);
             }else if(isset($transfer['success'])){
+                  //applying tax to the transaction
+                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->from),$request->amount,config("constants.tax_amount_transfer"));
                 return redirect()->route('home')->with('success', $transfer['success']);
             }
 
@@ -494,6 +526,7 @@ class Home extends Controller
             }else if(isset($withdraw['error'])){
                 return redirect()->route('home')->with('error', $withdraw['error']);
             }else if(isset($withdraw['success'])){
+                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->from),$request->amount,config("constants.tax_amount_withdraw"));
                 return redirect()->route('home')->with('success', $withdraw['success']);
             }
         }catch(Exception $ex){
@@ -597,6 +630,7 @@ class Home extends Controller
             // }
 
            if(isset($pro_account['success'])){
+                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->wallet_id), $card['data']['pricing_amount'],0);
                 return redirect()->route("home")->with("success",$pro_account['success']);
            }
         }catch(Exception $ex){
