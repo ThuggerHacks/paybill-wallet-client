@@ -84,32 +84,16 @@
      <!-- Stats -->
      <div class="section">
         <div class="row mt-2">
-            <div class="col-6">
-                <div class="stat-box">
-                    <div class="title">Income</div>
-                    <div class="value text-success">$ 552.95</div>
+            @foreach ($cards as $card)
+                <div class="col-6 my-2" style="cursor: pointer" data-bs-target="#DialogIconedButtonInline" data-bs-toggle="modal">
+                    <div class="stat-box" onclick="payCard({{ $card['pricing_id'] }})">
+                        <div class="other">
+                            <div class="title">{{ $card['pricing_title'] }} </div>
+                            <div class="value">{{ $card['pricing_amount'] }}<small style="font-size:12px">mzn</small> </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="stat-box">
-                    <div class="title">Expenses</div>
-                    <div class="value text-danger">$ 86.45</div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-6">
-                <div class="stat-box">
-                    <div class="title">Total Bills</div>
-                    <div class="value">$ 53.25</div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="stat-box">
-                    <div class="title">Savings</div>
-                    <div class="value">$ 120.99</div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
    
@@ -121,12 +105,51 @@
     <x-slide-bar :wallets="$wallets"></x-slide-bar>
 </div>
 
-
+    <!-- Dialog Iconed Inline -->
+    <div class="modal fade dialogbox" id="DialogIconedButtonInline" data-bs-backdrop="static" tabindex="-1"
+    role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Continuar com o pagamento?</h5>
+            </div>
+            <div class="modal-body">
+               Tem certeza que quer continuar?
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route("buy.card") }}" method="POST"> 
+                    @csrf
+                    @method("PUT")
+                    <div class="btn-inline">
+                        <a href="#" class="btn btn-text-danger dismiss" data-bs-dismiss="modal" onclick="dismiss()">
+                            <ion-icon name="close-outline"></ion-icon>
+                            CANCELAR
+                        </a>
+                        <input type="hidden" class="form-control" name="wallet_id" value="{{ base64_encode($wallet_id) }}">
+                        <input type="hidden" class="form-control" id="cardId" name="card_id" value="">
+                        <button type="submit"   class="btn btn-text-primary continue" >
+                            <ion-icon name="checkmark-outline"></ion-icon>
+                            CONTINUAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- * Dialog Iconed Inline -->
 
 @endsection
 
 <script>
     // Add to Home with 2 seconds delay.
-    AddtoHome("2000", "once");
+    // AddtoHome("2000", "once");
 
+
+    const payCard = (id) => {
+        let link = document.querySelector("#cardId");
+        link.value = id;
+    }
+
+ 
 </script>

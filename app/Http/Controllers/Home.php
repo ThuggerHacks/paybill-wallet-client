@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+use Illuminate\Support\Facades\Crypt;
+
 class Home extends Controller
 {
 
@@ -32,7 +34,13 @@ class Home extends Controller
                 'access_token' => $request->session()->get('user_token')
             ])->get(config("constants.paybill_api").'/payments/wallet/'.urlencode($active_wallet['wallet_id']).'/?page=1');
 
-            return view('home',["wallets" => $my_wallets['data'],"data" => $payments, "wallet_id" => $active_wallet['wallet_id']]);
+            $cards = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api")."/cards");
+
+
+            return view('home',["wallets" => $my_wallets['data'],"data" => $payments, "wallet_id" => $active_wallet['wallet_id'],"cards" => $cards['data']]);
 
         }catch( Exception $ex){
             return redirect()->back();
@@ -47,7 +55,7 @@ class Home extends Controller
                 'access_token' => $request->session()->get('user_token')
             ])->get(config("constants.paybill_api").'/user/profile');
     
-            return view('user',['data' => $user]);
+            return view('user',['data' => $user, "secret_key" => Crypt::encrypt(base64_encode($user['user_id']))]);
         }catch(Exception $ex){
             return redirect()->back();
         }
@@ -510,4 +518,90 @@ class Home extends Controller
         }
     }
 
+    public function buyCard(Request $request){
+
+        try{
+
+             ////pay after upgrade
+
+            //getting card price
+            $card = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/cards/'.$request->card_id);
+
+            //check errors
+            if(isset($card['message'])){
+                return redirect()->route("home")->with("error", $card['message']);
+            }
+
+            if(isset($card['error'])){
+                return redirect()->route("home")->with("error", $card['error']);
+            }
+
+            if(isset($card['errors'])){
+                return redirect()->route("home")->with("error", $card['errors']);
+            }
+
+            $payAccount = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->post(config("constants.paybill_api").'/paybill/payment/wallet/'.config("constants.wallet_id"),[
+                "payment_amount" => $card['data']['pricing_amount'],
+                "payer_wallet_id" => base64_decode($request->wallet_id),
+                "card_id" => $request->card_id,
+                "secret_key" => config("constants.secret_key")
+            ]);
+
+
+              //dealing with errors
+            if(isset($payAccount['message'])){
+                return redirect()->route("home")->with("error", $payAccount['message']);
+            }
+
+            if(isset($payAccount['error'])){
+                return redirect()->route("home")->with("error", $payAccount['error']);
+            }
+
+            if(isset($payAccount['errors'])){
+                return redirect()->route("home")->with("error", $payAccount['errors']);
+            }
+
+
+
+            $pro_account = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->put(config("constants.paybill_api").'/cards/update/pro',[
+                "wallet_id" => base64_decode($request->wallet_id),
+                "card_id" => $request->card_id
+            ]);
+            
+          
+
+              //dealing with errors
+            if(isset($pro_account['message'])){
+                return redirect()->route("home")->with("error", $pro_account['message']);
+            }
+
+            if(isset($pro_account['error'])){
+                return redirect()->route("home")->with("error", $pro_account['error']);
+            }
+
+            if(isset($pro_account['errors'])){
+                return redirect()->route("home")->with("error", $pro_account['errors']);
+            }
+
+            // if(count($transfers['transfers']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
+
+           if(isset($pro_account['success'])){
+                return redirect()->route("home")->with("success",$pro_account['success']);
+           }
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+
+    }
 }

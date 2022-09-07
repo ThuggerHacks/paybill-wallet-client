@@ -149,6 +149,14 @@
                 </div>
             </a>
         </li>
+
+        <li>
+            <a href="#" class="item" data-bs-target="#DialogForm12" data-bs-toggle="modal">
+                <div class="in">
+                    <div>Chave secreta</div>
+                </div>
+            </a>
+        </li>
         {{-- <li>
             <div class="item">
                 <div class="in">
@@ -179,5 +187,35 @@
 <x-picture-modal></x-picture-modal>
 <x-bottom-tab :user="false" :config="true" ></x-bottom-tab>
 
+<!-- Dialog Form -->
+<div class="modal fade dialogbox" id="DialogForm12" data-bs-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deposit Money</h5>
+            </div>
+            <form>
+                <div class="modal-body text-start mb-2">
 
+                    <div class="form-group basic">
+                        <div class="input-wrapper">
+                            <label class="label" for="account1">Chave secreta</label>
+                            <input type="text" class="form-control" name="" id="" value="{{ $secret_key }}">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-inline">
+                        <button type="button" class="btn btn-text-secondary"
+                            data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- * Dialog Form -->
 @endsection

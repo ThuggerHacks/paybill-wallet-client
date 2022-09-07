@@ -31,3 +31,6 @@ Route::post("/deposit",[Home::class,"createDeposit"])->middleware('guard')->name
 Route::post("/withdraw",[Home::class,"createWithdraw"])->middleware('guard')->name("withdraw.create");
 
 Route::post("/activate/wallet",[Home::class,"activateWallet"])->middleware('guard')->name("activate.wallet");
+
+
+Route::put("/buy/card",[Home::class,"buyCard"])->middleware('guard')->name("buy.card");
