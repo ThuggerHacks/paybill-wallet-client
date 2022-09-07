@@ -192,11 +192,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Deposit Money</h5>
+                <h5 class="modal-title">Paybill</h5>
             </div>
             <form>
-                <div class="modal-body text-start mb-2">
-
+                <div class="modal-body  mb-2">
+                    <small class="text-center">
+                        Use esta chave para integrar a sua carteira ao seu sistema.
+                    </small>
                     <div class="form-group basic">
                         <div class="input-wrapper">
                             <label class="label" for="account1">Chave secreta</label>
