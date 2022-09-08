@@ -67,7 +67,11 @@
                     @elseif($type == "received")
                         {{$data['transfer']['sent_from_wallet_id']}} 
                     @elseif($type == "payment")
-                        {{$data['payments']['payer_wallet_id']}} 
+                        @if($data['payments']['payer_wallet_id'] == config("constants.tax_wallet_id") || $data['payments']['payer_wallet_id'] == config("constants.wallet_id"))
+                            Conta Paybill
+                        @else
+                            {{$data['payments']['payer_wallet_id']}} 
+                        @endif
                     @endif
                 </span>
             </li>
@@ -83,7 +87,11 @@
                     @elseif ($type == "received")
                         {{$data['transfer']['sent_to_wallet_id']}} 
                     @elseif($type == "payment")
-                        {{$data['payments']['wallet_id']}} 
+                        @if($data['payments']['wallet_id'] == config("constants.tax_wallet_id") ||    $data['payments']['wallet_id'] == config("constants.wallet_id"))
+                                Conta Paybill
+                        @else
+                            {{$data['payments']['wallet_id']}} 
+                        @endif 
                     @endif
                 </span>
             </li>
@@ -116,7 +124,7 @@
                     @elseif ($type == "transfer" || $type == "received")
                         {{$data['transfer']['sent_at']}}
                     @elseif($type == "payment")
-                        {{$data['payments']['payment_reference']}}
+                        {{$data['payments']['payment_date']}}
                     @endif
                 </span>
             </li>

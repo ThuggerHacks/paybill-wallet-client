@@ -106,6 +106,17 @@
                             </div>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route("taxes",urlencode(base64_encode($wallet_id))) }}" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="cash-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Taxas
+                            </div>
+                        </a>
+                    </li>
                     {{-- <li>
                         <a href="app-pages.html" class="item">
                             <div class="icon-box bg-primary">

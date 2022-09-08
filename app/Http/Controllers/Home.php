@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 class Home extends Controller
 {
 
-    private function payTax($token,$payer_wallet,$transation_amount,$tax_amount){
+    private function payTax($token,$payer_wallet,$transation_amount,$tax_amount,$title){
         
         $payAccount = Http::withHeaders([
             'Accept' => 'application/json',
@@ -19,7 +19,8 @@ class Home extends Controller
         ])->post(config("constants.paybill_api").'/paybill/payment/wallet/'.config("constants.tax_wallet_id"),[
             "payment_amount" => (floatval($transation_amount)*floatval($tax_amount)/100),
             "payer_wallet_id" => $payer_wallet,
-            "secret_key" => config("constants.secret_key")
+            "secret_key" => config("constants.secret_key"),
+            "title" => $title
         ]);
 
 
@@ -300,6 +301,38 @@ class Home extends Controller
         return view('transation');
     }
 
+    public function taxes(Request $request, $wallet_id = 0, $page = 1) {
+
+        if($wallet_id == 0 ){
+            return redirect()->back();
+        }
+
+        try{
+
+            $payments = Http::withHeaders([
+                'Accept' => 'application/json',
+                'access_token' => $request->session()->get('user_token')
+            ])->get(config("constants.paybill_api").'/payments/wallet/'.urlencode(base64_decode($wallet_id)).'/?page='.$page);
+            
+             //dealing with errors
+            if(isset($payments['message'])){
+                return redirect()->route("home");
+            }
+
+            if(isset($payments['error'])){
+                return redirect()->route("home");
+            }
+
+            // if(count($payments['payments']['data']) == 0 ) {
+            //     return redirect()->route("home");
+            // }
+
+            return view('taxes',["data" => $payments,"wallet_id" => base64_decode($wallet_id)]);
+        }catch(Exception $ex){
+            return redirect()->back();
+        }
+    }
+
     public function createWallet(Request $request){
         
         //getting form data
@@ -460,7 +493,7 @@ class Home extends Controller
                 return redirect()->route('home')->with('error', $transfer['error']);
             }else if(isset($transfer['success'])){
                   //applying tax to the transaction
-                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->from),$request->amount,config("constants.tax_amount_transfer"));
+                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->from),$request->amount,config("constants.tax_amount_transfer"),"Taxa de transferencia");
                 return redirect()->route('home')->with('success', $transfer['success']);
             }
 
@@ -526,7 +559,7 @@ class Home extends Controller
             }else if(isset($withdraw['error'])){
                 return redirect()->route('home')->with('error', $withdraw['error']);
             }else if(isset($withdraw['success'])){
-                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->from),$request->amount,config("constants.tax_amount_withdraw"));
+                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->from),$request->amount,config("constants.tax_amount_withdraw"),"Taxa de levantamento");
                 return redirect()->route('home')->with('success', $withdraw['success']);
             }
         }catch(Exception $ex){
@@ -630,7 +663,7 @@ class Home extends Controller
             // }
 
            if(isset($pro_account['success'])){
-                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->wallet_id), $card['data']['pricing_amount'],0);
+                $tax = $this->payTax($request->session()->get('user_token'),base64_decode($request->wallet_id), $card['data']['pricing_amount'],0,"Compra de Cartao");
                 return redirect()->route("home")->with("success",$pro_account['success']);
            }
         }catch(Exception $ex){
@@ -638,4 +671,6 @@ class Home extends Controller
         }
 
     }
+
+
 }

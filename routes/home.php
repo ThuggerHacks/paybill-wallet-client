@@ -14,6 +14,8 @@ Route::get('/withdraws/{wallet_id?}/{page?}', [Home::class,"withdraws"])->middle
 
 Route::get('/payments/{wallet_id?}/{page?}', [Home::class, "payments"])->middleware('guard')->name("payments");
 
+Route::get('/taxes/{wallet_id?}/{page?}', [Home::class, "taxes"])->middleware('guard')->name("taxes");
+
 Route::get('/sends/{wallet_id?}/{page?}', [Home::class,"sends"])->middleware('guard')->name("sends");
 
 Route::get('/received/{wallet_id?}/{page?}', [Home::class ,"received"])->middleware('guard')->name("received");

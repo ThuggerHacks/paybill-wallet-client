@@ -14,7 +14,7 @@
         <div class="transactions">
            @foreach ($data['payments']['data'] as $payments)
            
-               @if($payments['wallet_id'] != config("constants.tax_wallet_id"))
+               @if($payments['wallet_id'] == config("constants.tax_wallet_id"))
                     <!-- item -->
                     <a href="{{ route("transation.details",["type" => "payment", "id" => urlencode(base64_encode($payments['payment_reference']))]) }}" class="item">
                         <div class="detail">
@@ -44,13 +44,13 @@
 
         @if($data['payments']['prev_page_url'])
             <div class="section mt-2 mb-2 col-md-2">
-                <a href="{{ route("payments",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['payments']['current_page'] - 1)] )}}" class="btn btn-primary btn-block btn-lg">Anterior</a>
+                <a href="{{ route("taxes",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['payments']['current_page'] - 1)] )}}" class="btn btn-primary btn-block btn-lg">Anterior</a>
             </div>
         @endif
 
         @if($data['payments']['next_page_url'])
             <div class="section mt-2 mb-2 col-md-2">
-                <a href="{{ route("payments",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['payments']['current_page'] + 1)] )}}" class="btn btn-primary btn-block btn-lg">Proximo</a>
+                <a href="{{ route("taxes",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['payments']['current_page'] + 1)] )}}" class="btn btn-primary btn-block btn-lg">Proximo</a>
             </div>
         @endif
     </div>

@@ -39,13 +39,13 @@
 
         @if($data['transfers']['prev_page_url'])
             <div class="section mt-2 mb-2 col-md-2">
-                <a href="{{ route("sends",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['transfers']['current_page'] - 1)] )}}" class="btn btn-primary btn-block btn-lg">Anterior</a>
+                <a href="{{ route("received",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['transfers']['current_page'] - 1)] )}}" class="btn btn-primary btn-block btn-lg">Anterior</a>
             </div>
         @endif
 
         @if($data['transfers']['next_page_url'])
             <div class="section mt-2 mb-2 col-md-2">
-                <a href="{{ route("sends",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['transfers']['current_page'] + 1)] )}}" class="btn btn-primary btn-block btn-lg">Proximo</a>
+                <a href="{{ route("received",["wallet_id" => urlencode(base64_encode($data['wallet']['wallet_id'])), "page" => ($data['transfers']['current_page'] + 1)] )}}" class="btn btn-primary btn-block btn-lg">Proximo</a>
             </div>
         @endif
     </div>
